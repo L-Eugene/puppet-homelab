@@ -1,0 +1,4 @@
+version: 5
+hierarchy:
+  - name: MySQL Server Configuration
+    path: mysql/config.eyaml
