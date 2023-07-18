@@ -1,3 +1,5 @@
 class profile::mysql_server {
-  mysql::server {}
+  class { 'mysql::server':
+    restart => true,
+  }
 }
