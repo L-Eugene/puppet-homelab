@@ -1,4 +1,6 @@
 class profile::gnucash_database {
+  $gnucash_users = lookup('gnucash_users')
+
   mysql::db { 'gnucash':
     user     => $gnucash_users[0]['username'],
     password => $gnucash_users[0]['password'],
