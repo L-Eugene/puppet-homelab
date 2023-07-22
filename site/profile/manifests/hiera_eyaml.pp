@@ -13,8 +13,8 @@ class profile::hiera_eyaml {
       ], 
       'lookup_key'    => 'eyaml_lookup_key', 
       'options'       => { 
-        'pkcs7_private_key' => '/etc/puppetlabs/puppet/keys/private_key.pkcs7.pem', 
-        'pkcs7_public_key'  => '/etc/puppetlabs/puppet/keys/public_key.pkcs7.pem', 
+        'pkcs7_private_key' => '/etc/puppetlabs/puppet/eyaml/private_key.pkcs7.pem', 
+        'pkcs7_public_key'  => '/etc/puppetlabs/puppet/eyaml/public_key.pkcs7.pem', 
       } 
     ], 
     eyaml             => true, 
