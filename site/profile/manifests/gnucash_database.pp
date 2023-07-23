@@ -7,7 +7,7 @@ class profile::gnucash_database {
     host     => '%',
     grant    => $gnucash_users[0]['grant'],
     # TODO: restore data from backup unless database exists
-    # sql => filename
-    # enforce_sql => false
+    sql => '/backup/epam-nb/gnucash-latest.sql.bz2'
+    enforce_sql => false
   }
 }
