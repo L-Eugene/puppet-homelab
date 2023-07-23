@@ -16,7 +16,7 @@ class profile::gnucash_database {
   file { '/root/gnucash-backup.sh':
     content => "#!/bin/bash
       date=$(date +'%Y-%m-%d')
-      mysqldump gnucash --no-tablespaces | bzip2 /tmp/gnucash-\$date.sql.bz2
+      mysqldump gnucash --no-tablespaces | bzip2 >/tmp/gnucash-\$date.sql.bz2
       cp /tmp/gnucash-\$date.sql.bz2 /backup/homelab/gnucash-\$date.sql.bz2
       mv /tmp/gnucash-\$date.sql.bz2 /backup/homelab/gnucash-latest.sql.bz2
       ",
