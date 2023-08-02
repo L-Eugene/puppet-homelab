@@ -5,6 +5,10 @@ node 'mysql-server.lan' {
   include role::mysql_server
 }
 
+node 'bot-server.lan' {
+  include role::bot_server
+}
+
 node 'puppet-master.lan' {
   include role::puppet_master
 }
