@@ -11,5 +11,6 @@ services:
     <% if $bot_volumes.size > 0 { -%>
     volumes:
     <% } -%>
-    <% $bot_volumes.each -%>
-    <% |$volume| { %> - <%= $volume %><% } -%>
+    <% $bot_volumes.each |$volume| { -%>
+    - <%= $volume %>
+    <% } -%>
