@@ -8,9 +8,9 @@ services:
   bot:
     image: <%= $bot_image %>
     restart: always
-    <% if $bot_volumes.size > 0 { -%>
+    <%- if $bot_volumes.size > 0 { -%>
     volumes:
-    <% } -%>
-    <% $bot_volumes.each |$volume| { -%>
+    <%- } -%>
+    <%- $bot_volumes.each |$volume| { -%>
     - <%= $volume %>
-    <% } -%>
+    <%- } -%>
