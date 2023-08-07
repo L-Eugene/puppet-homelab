@@ -1,0 +1,15 @@
+<%- | String $bot_image,
+      Array  $bot_volumes
+| -%>
+
+version: '3.0'
+
+services:
+  bot:
+    image: <%= $bot_image %>
+    restart: always
+    <% if $bot_volumes.size > 0 { -%>
+    volumes:
+    <% } -%>
+    <% $bot_volumes.each -%>
+    <% |$volume| { %> - <%= $volume %><% } -%>

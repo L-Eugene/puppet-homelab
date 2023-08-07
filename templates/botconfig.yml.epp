@@ -1,0 +1,11 @@
+<%- | Boolean $debug,
+| -%>
+libdir: lib
+basedir: db
+logfile: /proc/self/fd/1
+
+debug:
+  flag: /tmp/test_debug
+  default: <%= $debug %>
+
+database:
