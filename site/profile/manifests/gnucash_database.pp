@@ -13,19 +13,8 @@ class profile::gnucash_database {
     enforce_sql    => false,
   }
 
-  file { '/root/gnucash-backup.sh':
-    content => "#!/bin/bash
-      date=$(date +'%Y-%m-%d')
-      mysqldump gnucash --no-tablespaces | bzip2 >/tmp/gnucash-\$date.sql.bz2
-      cp /tmp/gnucash-\$date.sql.bz2 /backup/homelab/gnucash-\$date.sql.bz2
-      mv /tmp/gnucash-\$date.sql.bz2 /backup/homelab/gnucash-latest.sql.bz2
-      ",
-    mode    => '0755',
-    owner   => 'root',
-  }
-
   cron { 'backup-gnucash-db':
-    command => '/root/gnucash-backup.sh',
+    command => '/root/database-backup.sh gnucash',
     user    => 'root',
     hour    => 3,
     minute  => 0,
