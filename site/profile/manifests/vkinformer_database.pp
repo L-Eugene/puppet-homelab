@@ -13,7 +13,7 @@ class profile::vkinformer_database {
     #enforce_sql    => false,
   }
 
-  cron { 'backup-gnucash-db':
+  cron { 'backup-vkinformer-db':
     command => '/root/database-backup.sh vkinformer',
     user    => 'root',
     hour    => 3,
