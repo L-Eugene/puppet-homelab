@@ -1,5 +1,5 @@
 class profile::vkinformer_database {
-  $gnucash_users = lookup('vkinformer_user')
+  $vkinformer_user = lookup('vkinformer_user')
 
   mysql::db { 'vkinformer':
     user     => $vkinformer_user['username'],
