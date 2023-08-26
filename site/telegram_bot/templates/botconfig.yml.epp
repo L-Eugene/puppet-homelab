@@ -1,4 +1,11 @@
 <%- | Boolean $debug,
+      String $db_adapter = 'mysql2',
+      String $db_socket = '',
+      String $db_host = 'localhost',
+      String $db_port = '3306',
+      String $db_name,
+      String $db_user = 'root',
+      String $db_pass,
 | -%>
 libdir: lib
 basedir: db
@@ -9,3 +16,18 @@ debug:
   default: <%= $debug %>
 
 database:
+  adapter: <%= $db_adapter %>
+  encoding: utf8
+  pool: 5
+  min_messages: warning
+  timeout: 5000
+  reconnect: true
+  username: <%= $db_user %>
+  password: <%= $db_pass %>
+  database: <%= $db_name %>
+  <%- if $db_socket != '' { -%>
+  socket: <%= $db_socket %>
+  <%- } else { -%>
+  host: <%= $db_host %>
+  port: <%= $db_port %>
+  <%- } -%>
