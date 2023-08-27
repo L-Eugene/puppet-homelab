@@ -32,7 +32,7 @@ class profile::vkinformerbot {
     )
   }
 
-  systemd::manage_unit { 'vkinformer':
+  systemd::manage_unit { 'vkinformer.service':
     unit_entry    => {
       'Description' => 'VK Informer Telegram bot',
       'PartOf'      => 'docker.service',
