@@ -40,7 +40,7 @@ class profile::vkinformerbot {
     },
     service_entry => {
       'Type'              => 'oneshot',
-      'RemainAfterExit'   => 'true',
+      'RemainAfterExit'   => true,
       'WorkingDirectory'  => '/opt/vkinformer/',
       'ExecStart'         => 'docker-compose up -d --remove-orphans',
       'ExecStop'          => 'docker-compose down',
