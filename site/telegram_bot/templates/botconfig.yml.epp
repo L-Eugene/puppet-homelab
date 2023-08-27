@@ -6,7 +6,10 @@
       String $db_name,
       String $db_user = 'root',
       String $db_pass,
+      String $tg_token = 'undefined',
 | -%>
+tg_token: <%= $tg_token %>
+
 libdir: lib
 basedir: db
 logfile: /proc/self/fd/1

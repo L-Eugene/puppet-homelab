@@ -15,7 +15,7 @@ class profile::vkinformerbot {
   }
 
   $vkinformer_user = lookup('vkinformer_user')
-  $vkinformer_base = lookup('vk_informer_db')
+  $vkinformer = lookup('vk_informer')
 
   file { '/opt/vkinformer/vk_informer_bot.rb.yml':
     ensure => file,
@@ -23,10 +23,11 @@ class profile::vkinformerbot {
       'telegram_bot/botconfig.yml.epp',
       { 
         'debug' => false,
-        'db_host' => $vkinformer_base['db_host'],
-        'db_name' => $vkinformer_base['db_name'],
-        'db_user' => $vkinformer_user['username'],
-        'db_pass' => $vkinformer_user['password'],
+        'db_host'  => $vkinformer['db']['db_host'],
+        'db_name'  => $vkinformer['db']['db_name'],
+        'db_user'  => $vkinformer_user['username'],
+        'db_pass'  => $vkinformer_user['password'],
+        'tg_token' => $vkinformer['tg']['token'],
       }
     )
   }
