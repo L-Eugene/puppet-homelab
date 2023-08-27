@@ -1,5 +1,7 @@
 class profile::docker_compose {
-  include 'docker'
+  class { 'docker':
+    log_driver => 'syslog',
+  }
 
   include 'docker::compose'
 }
