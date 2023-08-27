@@ -1,5 +1,6 @@
 mod 'landcareresearch-amazon_s3', '6.0.0'
 mod 'puppet-hiera', '5.0.1'
+mod 'puppet-systemd', '5.2.0'
 mod 'puppetlabs-apt', '9.1.0'
 mod 'puppetlabs-docker', '9.1.0'
 mod 'puppetlabs-inifile', '6.1.0'

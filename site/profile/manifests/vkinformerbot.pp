@@ -30,4 +30,24 @@ class profile::vkinformerbot {
       }
     )
   }
+
+  systemd::manage_unit { 'vkinformer':
+    unit_entry    => {
+      'Description' => 'VK Informer Telegram bot',
+      'PartOf'      => 'docker.service',
+      'After'       => 'docker.service',
+    },
+    service_entry => {
+      'Type'              => 'oneshot',
+      'RemainAfterExit'   => 'true',
+      'WorkingDirectory'  => '/opt/vkinformer/',
+      'ExecStart'         => 'docker-compose up -d --remove-orphans',
+      'ExecStop'          => 'docker-compose down',
+    },
+    install_entry => {
+      'WantedBy' => 'multi-user.target',
+    },
+    enable        => true,
+    active        => true,
+  }
 }
