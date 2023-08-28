@@ -1,0 +1,11 @@
+{
+    "name": "elapeko-telegram_bot",
+    "version": "0.1.0",
+    "author": "elapeko",
+    "summary": "Install Telegram bot as docker-compose app",
+    "dependencies": [
+        { "name": "puppet-systemd", "version_requirement": ">= 5.0.0 < 6.0.0" }
+    ],
+    "license": "Unlicense",
+    "source": "None"
+}
