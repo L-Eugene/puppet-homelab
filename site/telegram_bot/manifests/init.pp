@@ -22,7 +22,12 @@ class telegram_bot (
     )
   }
 
-  $config_parameters = { 'db_name' => '', 'db_pass' => '' } + { 'debug' => $bot_debug } + $bot_database
+  $config_parameters = { 
+    'db_name' => '',
+    'db_pass' => '',
+    'debug' => $bot_debug,
+    'tg_token' => $bot_token
+  } + $bot_database
 
   file { "/opt/${$name}/${$bot_config_file}":
     ensure => file,
