@@ -3,7 +3,7 @@ class telegram_bot (
   String $bot_image,
   String $bot_app_path = '/usr/src/app',
   Array  $bot_volumes = [],
-  String $bot_debug = false,
+  Boolean $bot_debug = false,
   String $bot_token = 'UNDEFINED',
   Hash   $bot_database = {}
 ) {
