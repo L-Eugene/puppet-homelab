@@ -1,11 +1,11 @@
 class profile::vkinformer_database {
-  $vkinformer_user = lookup('vkinformer_user')
+  $vkinformer = lookup('vk_informer')
 
   mysql::db { 'vkinformer':
-    user     => $vkinformer_user['username'],
-    password => $vkinformer_user['password'],
+    user     => $vkinformer['db']['user'],
+    password => $vkinformer['db']['pass'],
     host     => '%',
-    grant    => $vkinformer_user['grant'],
+    grant    => 'ALL',
 
     # TODO: restore data from backup unless database exists
     #sql            => ['/backup/homelab/vkinformer-latest.sql.bz2'],

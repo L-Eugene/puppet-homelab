@@ -1,5 +1,4 @@
 class profile::vkinformerbot {
-  $vkinformer_user = lookup('vkinformer_user')
   $vkinformer = lookup('vk_informer')
 
   class { 'telegram_bot':
@@ -8,10 +7,10 @@ class profile::vkinformerbot {
     bot_image       => 'elapeko/vkinformerbot',
     bot_token       => $vkinformer['tg']['token'],
     bot_database    => {
-      'db_host'  => $vkinformer['db']['db_host'],
-      'db_name'  => $vkinformer['db']['db_name'],
-      'db_user'  => $vkinformer_user['username'],
-      'db_pass'  => $vkinformer_user['password'],
+      'db_host'  => $vkinformer['db']['host'],
+      'db_name'  => $vkinformer['db']['name'],
+      'db_user'  => $vkinformer['db']['user'],
+      'db_pass'  => $vkinformer['db']['pass'],
     }
   }
 }
