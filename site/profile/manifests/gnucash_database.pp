@@ -5,6 +5,7 @@ class profile::gnucash_database {
     user           => $gnucash_users[0]['username'],
     password       => $gnucash_users[0]['password'],
     host           => '%',
+    grant          => $gnucash_users[0]['grant'],
 
     sql            => ['/backup/homelab/gnucash-latest.sql.bz2'],
     import_cat_cmd => 'bzcat',
@@ -12,10 +13,13 @@ class profile::gnucash_database {
   }
 
   $gnucash_users.each |$user| {
-    unless $user['username'] == $gnucash_users[0]['username'] {
-      mysql_user { "${$user['username']}@%":
-        password_hash => mysql::password($user['password']),
-      }
+    if $user['username'] == $gnucash_users[0]['username'] {
+      # Skipping the first user as it's already created and granted
+      next
+    }
+
+    mysql_user { "${$user['username']}@%":
+      password_hash => mysql::password($user['password']),
     }
 
     mysql_grant { "${$user['username']}@%/gnucash.*":
