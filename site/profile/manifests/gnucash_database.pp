@@ -12,8 +12,10 @@ class profile::gnucash_database {
   }
 
   $gnucash_users.each |$user| {
-    mysql_user { "${$user['username']}@%":
-      password_hash => mysql::password($user['password']),
+    unless $user['username'] == $gnucash_users[0]['username'] {
+      mysql_user { "${$user['username']}@%":
+        password_hash => mysql::password($user['password']),
+      }
     }
 
     mysql_grant { "${$user['username']}@%/gnucash":
