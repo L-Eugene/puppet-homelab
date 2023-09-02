@@ -14,6 +14,18 @@ gnucash_users:
       xoUop7mMjfd8ECgCA/BiwjDSxBdEgG1xVZiwJa1FIilAL+afkt4Xn4b5Lysg
       ==]
     grant: ALL
+  - username: nastya
+    password: >
+      ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBAD
+      AFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEA3A5LRj5s3RuDMEoducPbIvC/hA
+      tWOFQtbAvt1O85iDU+kBVA28b0nqz0r9YiZ+hbsihR3E8/MS+Dqb7KOZOVbS
+      2sv6jnHo6mZ2jSzKN6dbz5zcGIxTZ76Q2oV3vO+UEzfwF6DAWj786d/jBmFA
+      2mag5SW1lYV7BhWcDknyLw2kH6hSx3OyKxLAs1AQ0goTZ6FCsI/8jKWYiqPs
+      MGhfP6JqNtp6fTjc9kPXUuyv/7rceeFTKZKvjPv83hAFFZPVrJVCRR8/Zatc
+      e/9F+fJSc08zmcZqkG7rTt3YRe0b7AoBQe6ZNju0MdqODfJqBgu/AN06NWhK
+      obrK/w9IwrS2VMbjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBAxnbQf/o
+      4eLDW0Jw6jdlvRgBCYUhYTOL/H7C/a06tqKeTm]
+    grant: SELECT
 aws_s3_backup:
   aws_access_key: >
     ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBAD
