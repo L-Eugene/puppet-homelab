@@ -18,7 +18,7 @@ class profile::gnucash_database {
       }
     }
 
-    mysql_grant { "${$user['username']}@%/gnucash":
+    mysql_grant { "${$user['username']}@%/gnucash.*":
       user       => "${$user['username']}@%",
       privileges => $user['grant'],
       table      => 'gnucash.*',
