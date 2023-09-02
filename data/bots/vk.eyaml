@@ -9,7 +9,5 @@ vk_informer:
     token: ENC[PKCS7,MIIBmQYJKoZIhvcNAQcDoIIBijCCAYYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAwqf89x2s7Z0EbpEquKe0AAwScbmEEFJwU21deBLbUrU4whH222JQ7W5ljMEYnFAcdaPrDMkAv+83DsqXdKJ+g8GwgWNbNmKYwEsd0grrLzEi9RggJjiokaudDJNNlTkIwDkA6x3mjgldFTAJh8jQ5My+w6t7C0l0coP6iuSJrZlrV1uFoXtac6pnnCBXwOa+m4K0RY9xR+ddyXFFqhgH8GPJsuHMvs8briQNgUR2DwkST1M8fTtX9RU3Q491I0M8lPTZ6yZGdzJa3aeVxsBkduRnPDDdFlSjKbbJG4b14MGWTH0gVflllaAS4we+0IxjNu7t5g9ELA3t4OwsNIJK4TBcBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBtu5N10yqDXp1UAUWta79xgDDw08TRw8JP0VhLkwZ+LtOeLY0+D//wYXz+8Q8CzCzsu8LGZQXGpHzUwBULFY/3MxQ=]
 
 lookup_options:
-  vk_informer:
-    tg:
-      token:
-        convert_to: "Sensitive"
+  vk_informer.tg.token:
+    convert_to: "Sensitive"
