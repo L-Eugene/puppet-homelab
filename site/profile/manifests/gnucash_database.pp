@@ -8,11 +8,14 @@ class profile::gnucash_database {
   }
 
   $gnucash_users.each |$user| {
-    mysql::db { 'gnucash':
-      user     => $user['username'],
-      password => $user['password'],
-      host     => '%',
-      grant    => $user['grant'],
+    mysql_user { "${$user['username']}@%":
+      password_hash => mysql::password($user['password']),
+    }
+
+    mysql_grant { "${$user['username']}@%/gnucash":
+      user       => "${$user['username']}@%",
+      privileges => $user['grant'],
+      table      => 'gnucash.*',
     }
   }
 
