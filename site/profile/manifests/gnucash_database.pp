@@ -15,7 +15,7 @@ class profile::gnucash_database {
   $gnucash_users.each |$user| {
     if $user['username'] == $gnucash_users[0]['username'] {
       # Skipping the first user as it's already created and granted
-      next
+      next()
     }
 
     mysql_user { "${$user['username']}@%":
