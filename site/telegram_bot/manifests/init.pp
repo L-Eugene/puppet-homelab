@@ -4,7 +4,7 @@ class telegram_bot (
   String $bot_app_path = '/usr/src/app',
   Array  $bot_volumes = [],
   Boolean $bot_debug = false,
-  Sensitive[String] $bot_token = 'UNDEFINED',
+  String $bot_token = 'UNDEFINED',
   Hash   $bot_database = {}
 ) {
   file { "/opt/${$name}":
