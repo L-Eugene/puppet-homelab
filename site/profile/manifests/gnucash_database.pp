@@ -27,6 +27,14 @@ class profile::gnucash_database {
       privileges => $user['grant'],
       table      => 'gnucash.*',
     }
+
+    # Even for readonly accounts GnuCash is trying to do some write operations
+    # https://bugs.gnucash.org/show_bug.cgi?id=645216
+    mysql_grant { "${$user['username']}@%/gnucash.numtest":
+      user       => "${$user['username']}@%",
+      privileges => 'ALL',
+      table      => 'gnucash.numtest',
+    }
   }
 
   cron { 'backup-gnucash-db':
