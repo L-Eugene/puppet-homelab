@@ -25,7 +25,10 @@ gnucash_users:
       e/9F+fJSc08zmcZqkG7rTt3YRe0b7AoBQe6ZNju0MdqODfJqBgu/AN06NWhK
       obrK/w9IwrS2VMbjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBAxnbQf/o
       4eLDW0Jw6jdlvRgBCYUhYTOL/H7C/a06tqKeTm]
-    grant: SELECT
+    grant: 
+      - SELECT
+      - CREATE
+      - DELETE
 aws_s3_backup:
   aws_access_key: >
     ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBAD
