@@ -20,10 +20,10 @@ class profile::amazon_s3_backup {
 
   file { '/root/database-backup.sh':
     content => "#!/bin/bash
-      date=$(date +'%Y-%m-%d')
-      mysqldump $1 --no-tablespaces | bzip2 >/tmp/$1-\$date.sql.bz2
-      cp /tmp/$1-\$date.sql.bz2 /backup/homelab/$1-\$date.sql.bz2
-      mv /tmp/$1-\$date.sql.bz2 /backup/homelab/$1-latest.sql.bz2
+      date=\$(date +'%Y-%m-%d')
+      mysqldump \$1 --no-tablespaces | bzip2 >/tmp/\$1-\$date.sql.bz2
+      cp /tmp/\$1-\$date.sql.bz2 /backup/homelab/\$1-\$date.sql.bz2
+      mv /tmp/\$1-\$date.sql.bz2 /backup/homelab/\$1-latest.sql.bz2
       ",
     mode    => '0755',
     owner   => 'root',
