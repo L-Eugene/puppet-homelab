@@ -1,4 +1,4 @@
-class profile::vkinformer_database {
+class profile::leetcode_database {
   $leetcodedb = lookup('leetcodedb')
 
   mysql::db { 'leetcode':
