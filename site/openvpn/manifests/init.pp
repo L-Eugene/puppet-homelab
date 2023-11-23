@@ -28,7 +28,7 @@ class openvpn (
     }
 
     # Creating ccd dir and configurations if needed
-    if $server_config.has_key('client-config-dir') {
+    if 'client-config-dir' in $server_config {
         file {$server_config['client-config-dir']:
             ensure => directory
         }
