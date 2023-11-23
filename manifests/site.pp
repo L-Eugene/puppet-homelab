@@ -12,3 +12,7 @@ node 'bot-server.lan' {
 node 'puppet-master.lan' {
   include role::puppet_master
 }
+
+node 'openvpn.lan' {
+  include role::openvpn_server
+}

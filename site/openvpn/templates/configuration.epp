@@ -1,0 +1,14 @@
+<%-
+    Hash $config
+ -%>
+<%- $config.each |$key, $value| {
+    if $value.is_a(Array) {
+        $value.each |$line| {
+            -%><%= $key %> <%= $line -%><%-
+        }
+    } elsif $value.is_a(Undef) {
+        -%><%= $key %><%-
+    } else {
+        -%><%= $key %> <%= $value %><%-
+    }
+} -%>
