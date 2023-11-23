@@ -2,7 +2,7 @@
 <%- $config.each |$key, $value| {
     if $value.is_a(Array) {
         $value.each |$line| {
-            -%><%= $key %> <%= $line -%>
+            -%><%= $key %> <%= $line %>
             <%-
         }
     } else {
