@@ -5,7 +5,7 @@ class profile::vpn_private {
     ensure  => directory,
     mode    => "0755",
     owner   => root,
-    group   => openvpn
+    group   => root
   }
 
   file { '/etc/openvpn/server/ca.crt':
@@ -13,7 +13,7 @@ class profile::vpn_private {
     content => $file_content['ca'],
     mode    => "0644",
     owner   => root,
-    group   => openvpn
+    group   => root
   }
 
   file { '/etc/openvpn/server/dh2048.pem':
@@ -21,7 +21,7 @@ class profile::vpn_private {
     content => $file_content['dh'],
     mode    => "0644",
     owner   => root,
-    group   => openvpn
+    group   => root
   }
 
   file { '/etc/openvpn/server/vps.crt':
@@ -29,7 +29,7 @@ class profile::vpn_private {
     content => $file_content['cert'],
     mode    => "0644",
     owner   => root,
-    group   => openvpn
+    group   => root
   }
 
   file { '/etc/openvpn/server/vps.key':
