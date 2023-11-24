@@ -37,7 +37,7 @@ class profile::vpn_private {
     content => $file_content['key'],
     mode    => "0600",
     owner   => root,
-    group   => openvpn
+    group   => root
   }
 
   class {'openvpn':
