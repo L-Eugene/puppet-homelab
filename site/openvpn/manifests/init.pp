@@ -43,8 +43,9 @@ class openvpn (
         }
     }
 
-    systemd::manage_unit { "openvpn@${server_name}.service":
-        enable        => true,
-        active        => true,
+    service { "openvpn@${server_name}.service":
+        provider => systemd,
+        ensure => running,
+        enable => true,
     }
 }
