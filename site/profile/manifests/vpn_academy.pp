@@ -56,7 +56,7 @@ class profile::vpn_academy {
         'ca' => '/etc/openvpn/academy/ca.crt',
         'cert' => '/etc/openvpn/academy/vps.crt',
         'key' => '/etc/openvpn/academy/vps.key',
-        'dh' => '/etc/openvpn/academy/dh2048.pem',
+        'dh' => '/etc/openvpn/academy/dh.pem',
         'topology' => 'subnet',
         'server' => '10.202.0.0 255.255.255.0',
         'ifconfig-pool-persist' => '/etc/openvpn/academy/ipp.txt',
