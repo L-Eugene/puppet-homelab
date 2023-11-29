@@ -1,12 +1,7 @@
 class profile::vpn_academy {
-  $file_content = lookup('vpn_academy')
+  include openvpn::dir
 
-  file { '/etc/openvpn/':
-    ensure  => directory,
-    mode    => "0755",
-    owner   => root,
-    group   => root
-  }
+  $file_content = lookup('vpn_academy')
 
   file { '/etc/openvpn/academy/':
     ensure  => directory,

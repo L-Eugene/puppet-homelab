@@ -1,12 +1,7 @@
 class profile::vpn_private {
-  $file_content = lookup('vpn_private')
+  include openvpn::dir
 
-  file { '/etc/openvpn/':
-    ensure  => directory,
-    mode    => "0755",
-    owner   => root,
-    group   => root
-  }
+  $file_content = lookup('vpn_private')
 
   file { '/etc/openvpn/server/':
     ensure  => directory,
