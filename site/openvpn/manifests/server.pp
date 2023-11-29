@@ -16,11 +16,6 @@ define openvpn::server (
         'verb' => 4
     } + $server_config
 
-    # Installing Packages
-    package { 'openvpn':
-        ensure => installed,
-    }
-
     # Creating server configuration file
     file {"/etc/openvpn/${server_name}.conf":
         ensure => file,

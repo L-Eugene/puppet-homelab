@@ -1,5 +1,5 @@
 class profile::vpn_academy {
-  include openvpn::dir
+  include openvpn::requirements
 
   $file_content = lookup('vpn_academy')
 
