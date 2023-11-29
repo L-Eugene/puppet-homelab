@@ -42,7 +42,7 @@ class profile::vpn_private {
     group   => root
   }
 
-  class {'openvpn':
+  openvpn::server  {'server':
     server_name => 'server',
     server_config => {
         'port' => 1194,

@@ -42,8 +42,7 @@ class profile::vpn_academy {
     group   => root
   }
 
-  class {'openvpn':
-    server_name => 'academy',
+  openvpn::server {'academy':
     server_config => {
         'port' => 1195,
         'proto' => 'tcp',

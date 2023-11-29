@@ -1,5 +1,5 @@
-class openvpn (
-    String $server_name = "server",
+define openvpn::server (
+    String $server_name = $name,
     Hash $server_config = {},
     Hash $ccd_options = {}
 ) {
