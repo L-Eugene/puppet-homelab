@@ -8,3 +8,7 @@ RUN apt-get update && apt-get install -y puppet
 RUN wget https://code.stanford.edu/puppetpublic/puppet-local-testing/raw/master/setup-puppet-local.sh && \
     chmod a+x setup-puppet-local.sh && \
     ./setup-puppet-local.sh local-test
+
+COPY pm.rb /local-test/pm.rb
+
+RUN chown -R vscode:vscode /local-test
