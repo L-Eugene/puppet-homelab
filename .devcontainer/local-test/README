@@ -1,0 +1,5 @@
+Install modules:
+    r10k puppetfile install
+
+Run local file:
+    ./pa.sh test.pp

@@ -1,14 +1,10 @@
 FROM mcr.microsoft.com/devcontainers/base:jammy
 
 # Install Puppet
-RUN apt-get update && apt-get install -y puppet
+RUN wget https://apt.puppetlabs.com/puppet7-release-jammy.deb && \
+  dpkg -i puppet7-release-jammy.deb && rm puppet7-release-jammy.deb && \
+  apt-get update && apt-get install -y puppetserver ruby r10k
 
-# Install and setup Puppet local testing script
-# https://code.stanford.edu/puppetpublic/puppet-local-testing
-RUN wget https://code.stanford.edu/puppetpublic/puppet-local-testing/raw/master/setup-puppet-local.sh && \
-    chmod a+x setup-puppet-local.sh && \
-    ./setup-puppet-local.sh local-test
-
-COPY pm.rb /local-test/pm.rb
+COPY --chown=vscode local-test/ /local-test/
 
 RUN chown -R vscode:vscode /local-test
