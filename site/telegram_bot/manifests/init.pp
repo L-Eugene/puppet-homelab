@@ -1,28 +1,30 @@
 class telegram_bot (
-  String $bot_config_file = "${$name}.rb.yml",
   String $bot_image,
+  String $bot_config_file = "${$name}.rb.yml",
   String $bot_app_path = '/usr/src/app',
   Array  $bot_volumes = [],
   Boolean $bot_debug = false,
   String $bot_token = 'UNDEFINED',
-  Hash   $bot_database = {}
+  Hash   $bot_database = {},
+  String $bot_migrate_command = 'rake db:migrate'
 ) {
   file { "/opt/${$name}":
     ensure => directory,
   }
 
   file { "/opt/${$name}/docker-compose.yml":
-    ensure => file,
+    ensure  => file,
     content => epp(
-      'telegram_bot/docker-compose.yml.epp', 
-      { 
-        'bot_image'   => $bot_image,  
-        'bot_volumes' => ["./${$bot_config_file}:${$bot_app_path}/${$bot_config_file}"] + $bot_volumes,
+      'telegram_bot/docker-compose.yml.epp',
+      {
+        'bot_image'           => $bot_image,
+        'bot_volumes'         => ["./${$bot_config_file}:${$bot_app_path}/${$bot_config_file}"] + $bot_volumes,
+        'bot_migrate_command' => $bot_migrate_command,
       }
     )
   }
 
-  $config_parameters = { 
+  $config_parameters = {
     'db_name' => '',
     'db_pass' => '',
     'debug' => $bot_debug,
@@ -30,7 +32,7 @@ class telegram_bot (
   } + $bot_database
 
   file { "/opt/${$name}/${$bot_config_file}":
-    ensure => file,
+    ensure  => file,
     content => epp('telegram_bot/botconfig.yml.epp', $config_parameters)
   }
 
@@ -41,16 +43,27 @@ class telegram_bot (
       'After'       => 'docker.service',
     },
     service_entry => {
-      'Type'              => 'oneshot',
-      'RemainAfterExit'   => true,
-      'WorkingDirectory'  => "/opt/${$name}/",
-      'ExecStart'         => 'docker-compose up -d --remove-orphans',
-      'ExecStop'          => 'docker-compose down',
+      'Type'             => 'oneshot',
+      'RemainAfterExit'  => true,
+      'WorkingDirectory' => "/opt/${$name}/",
+      'ExecStart'        => 'docker-compose up -d --remove-orphans',
+      'ExecStop'         => 'docker-compose down',
     },
     install_entry => {
       'WantedBy' => 'multi-user.target',
     },
     enable        => true,
     active        => true,
+  }
+
+  exec { "${$name}-compose-rebuild":
+    command     => "docker-compose pull; systemctl restart ${$name}",
+    path        => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    cwd         => "/opt/${$name}/",
+    subscribe   => [
+      File["/opt/${$name}/docker-compose.yml"],
+      File["/opt/${$name}/${$bot_config_file}"]
+    ],
+    refreshonly => true,
   }
 }

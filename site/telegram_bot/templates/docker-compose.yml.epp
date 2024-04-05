@@ -1,10 +1,21 @@
 <%- | String $bot_image,
-      Array  $bot_volumes
+      Array  $bot_volumes,
+      String $bot_migrate_command,
 | -%>
 
 version: '3.0'
 
 services:
+  migrate-db:
+    image: <%= $bot_image %>
+    command: <%= $bot_migrate_command %>
+    <%- if $bot_volumes.size > 0 { -%>
+    volumes:
+    <%- } -%>
+    <%- $bot_volumes.each |$volume| { -%>
+    - <%= $volume %>
+    <%- } -%>
+
   bot:
     image: <%= $bot_image %>
     restart: always
@@ -14,3 +25,6 @@ services:
     <%- $bot_volumes.each |$volume| { -%>
     - <%= $volume %>
     <%- } -%>
+    depends_on:
+      migrate-db:
+        condition: service_completed_successfully
