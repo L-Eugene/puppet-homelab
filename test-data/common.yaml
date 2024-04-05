@@ -1,0 +1,9 @@
+---
+vk_informer:
+  tg:
+    token: some_token
+  db:
+    host: hostname_db
+    name: database_name
+    user: root
+    pass: root

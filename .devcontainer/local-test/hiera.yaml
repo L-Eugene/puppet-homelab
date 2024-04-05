@@ -6,3 +6,6 @@ defaults:
 hierarchy:
   - name: "Common data"
     path: "common.yaml"
+
+  - name: "External data"
+    path: "external.yaml"
