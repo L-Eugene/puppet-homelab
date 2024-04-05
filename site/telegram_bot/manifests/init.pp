@@ -6,7 +6,7 @@ class telegram_bot (
   Boolean $bot_debug = false,
   String $bot_token = 'UNDEFINED',
   Hash   $bot_database = {},
-  String $bot_migrate_command = 'rake db:migrate'
+  String $bot_migrate_command = 'bundle exec rake db:migrate'
 ) {
   file { "/opt/${$name}":
     ensure => directory,
