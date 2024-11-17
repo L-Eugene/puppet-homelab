@@ -28,10 +28,20 @@ class profile::bablobot {
     ensure  => present,
     command => "docker pull ghcr.io/l-eugene/bablobot/bablobot:latest && \
           docker run -v /opt/bablobot/config.yml:/usr/src/app/config.yml --rm \
-          ghcr.io/l-eugene/bablobot/bablobot:latest --output=chat",
+          ghcr.io/l-eugene/bablobot/bablobot:latest --action=statistic --output=chat",
     user    => 'root',
     hour    => 18,
     minute  => 0,
     weekday => '5',
+  }
+
+  cron { 'bablobot_daily_job':
+    ensure  => present,
+    command => "docker pull ghcr.io/l-eugene/bablobot/bablobot:latest && \
+          docker run -v /opt/bablobot/config.yml:/usr/src/app/config.yml --rm \
+          ghcr.io/l-eugene/bablobot/bablobot:latest --action=rates",
+    user    => 'root',
+    hour    => 22,
+    minute  => 0,
   }
 }
