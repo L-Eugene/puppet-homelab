@@ -37,7 +37,7 @@ gnucash_users:
       xYYt9gBqXiSULFIrb6wRlyA69j1eZS2Z6zQjck2huUDaYOz4hpisPSCx9TNZ
       IHsm5MhvGoY7R7djA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBCjmKWmXd
       aP/8+6CpH6JYiggBCp0/63KhhQU84sT4nu6oo7]
-    grant: SELECT
+    grant: ALL
 aws_s3_backup:
   aws_access_key: >
     ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBAD
