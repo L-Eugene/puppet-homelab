@@ -41,7 +41,7 @@ class profile::bablobot {
           docker run -v /opt/bablobot/config.yml:/usr/src/app/config.yml --rm \
           ghcr.io/l-eugene/bablobot/bablobot:latest --action=rates",
     user    => 'root',
-    hour    => 22,
+    hour    => 5,
     minute  => 0,
   }
 }
