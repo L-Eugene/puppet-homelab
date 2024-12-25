@@ -16,3 +16,7 @@ node 'puppet-master.lan' {
 node 'openvpn.lan' {
   include role::openvpn_server
 }
+
+node 'minecraft.lan' {
+  include role::minecraft_server
+}
