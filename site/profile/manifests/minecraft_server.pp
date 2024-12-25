@@ -7,7 +7,7 @@ class profile::minecraft_server {
     ensure => directory,
   }
 
-  file { "/opt/${$name}/docker-compose.yml":
+  file { '/opt/minecraft/docker-compose.yml':
     ensure  => file,
     content => @("EOF")
       version: '3'
