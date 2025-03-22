@@ -13,7 +13,7 @@ class profile::network_config {
       },
       wifi-security => {
         'key-mgmt' => 'wpa-psk',
-        'pks'      => 'password'
+        'psk'      => 'password'
       },
       ipv4          => {
         'dns-search' => '',
