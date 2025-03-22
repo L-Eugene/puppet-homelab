@@ -1,6 +1,6 @@
 # This class configures the network connections on the system.
 class profile::network_config {
-  nm::connection { 'ass-teriks':
+  networkmanager::connection { 'ass-teriks':
     content => {
       connection    => {
         'id'          => 'ass-teriks',

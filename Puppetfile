@@ -1,6 +1,5 @@
 mod 'puppetlabs-stdlib', '9.3.0'
 mod 'landcareresearch-amazon_s3', '6.0.0'
-mod 'lsst-nm', '0.3.0'
 mod 'puppet-extlib', '7.5.1'
 mod 'puppet-hiera', '5.0.1'
 mod 'puppet-systemd', '5.2.0'
