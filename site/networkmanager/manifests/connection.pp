@@ -2,6 +2,8 @@ define networkmanager::connection(
   Hash[String, Hash] $content,
   Enum['present', 'absent'] $ensure = 'present'
 ) {
+  include networkmanager::reload
+
   $_ensure = $ensure ? {
     'absent' => 'absent',
     default  => 'file'
@@ -14,10 +16,5 @@ define networkmanager::connection(
     mode      => '0600',
     owner     => 'root',
     notify    => Exec['nmcli conn reload'],
-  }
-
-  exec { 'nmcli conn reload':
-    command     => '/usr/bin/nmcli conn reload',
-    refreshonly => true,
   }
 }
