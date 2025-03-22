@@ -14,4 +14,9 @@ define networkmanager::connection(
     owner   => 'root',
     notify  => Exec['nmcli conn reload'],
   }
+
+  exec { 'nmcli conn reload':
+    command     => '/usr/bin/nmcli conn reload',
+    refreshonly => true,
+  }
 }
