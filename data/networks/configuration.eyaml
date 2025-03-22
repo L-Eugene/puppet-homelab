@@ -19,3 +19,35 @@ network_config:
         dns-search: ''
         method: auto
         addr-gen-mode: stable-privacy
+  mikrotik_static:
+    content:
+      connection:
+        id: Mikrotik Static
+        type: ethernet
+        permissions: ''
+        autoconnect: 'false'
+      ethernet:
+        mac-address-blacklist:
+      ipv4:
+        address1: '192.168.88.10/24,192.168.88.1'
+        method: manual
+        dns-search: ''
+        method: auto
+      ipv6:
+        dns-search: ''
+        method: auto
+  default_ethernet:
+    content:
+      connection:
+        id: DHCP
+        type: ethernet
+        permissions: ''
+        autoconnect: 'true'
+      ethernet:
+        mac-address-blacklist:
+      ipv4:
+        dns-search: ''
+        method: auto
+      ipv6:
+        dns-search: ''
+        method: auto
