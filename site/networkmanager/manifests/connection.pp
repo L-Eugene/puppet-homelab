@@ -8,11 +8,12 @@ define networkmanager::connection(
   }
 
   file { "/etc/NetworkManager/system-connections/${title}":
-    ensure  => $_ensure,
-    content => extlib::to_ini($content, { 'quote_char' => undef }),
-    mode    => '0600',
-    owner   => 'root',
-    notify  => Exec['nmcli conn reload'],
+    ensure    => $_ensure,
+    content   => extlib::to_ini($content, { 'quote_char' => undef }),
+    show_diff => false,
+    mode      => '0600',
+    owner     => 'root',
+    notify    => Exec['nmcli conn reload'],
   }
 
   exec { 'nmcli conn reload':
