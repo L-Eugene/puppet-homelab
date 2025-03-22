@@ -11,7 +11,7 @@ network_config:
         mode: infrastructure
       wifi-security:
         key-mgmt: wpa-psk
-        psk: 123
+        psk: ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAssa+JuibY7Vm1+UfxNC0eR95dWmKylqLTFIcst132qOwZAFiBM4IhfnGfbng+LDSU5x7HiL3ffdoZ3/DThTWfzJnHUyCHCuhnohoh1GKh8oeDvUqbP+AuUNs737ut7wB42cL7Zql7RR9Vlp00nxeW2qbTy6fUS2HlhUX+W6+4pAfO3OUTGexK6NCu07OHkJOPwvyZ0bPjeMpQqbEgJ18LUYQQyB+lsx+Y1Nyk3ivbWVJTOcDbr274vktcF5slpBezgHnkivsgb14C8wLAxtL5muJBZEaadXseP1fjvs3Kv9g8rVjwrhHQAa/RsipZ5VRB3oQ0ggCMdUD1400fK+4nTA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBCdP2thBDLG11eblRAYgWqZgBDYbS1R5vhWn7KrlwzZ5mI8]
       ipv4:
         dns-search: ''
         method: auto
@@ -19,4 +19,3 @@ network_config:
         dns-search: ''
         method: auto
         addr-gen-mode: stable-privacy
-    
