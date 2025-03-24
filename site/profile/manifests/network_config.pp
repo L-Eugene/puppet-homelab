@@ -5,4 +5,34 @@ class profile::network_config {
 
   $configs = lookup('network_config')
   create_resources('networkmanager::connection', $configs)
+
+  class { 'ufw':
+    manage_package => true,
+    package_name   => 'ufw',
+    package_ensure => 'present',
+    manage_service => true,
+    service_name   => 'ufw',
+    service_ensure => 'running',
+    service_enable => true,
+    rules          => {
+      'allow_ssh'      => {
+        'ensure'       => 'present',
+        'action'       => 'allow',
+        'to_ports_app' => 22,
+        'proto'        => 'tcp'
+      },
+      'allow_homm_tcp' => {
+        'ensure'       => 'present',
+        'action'       => 'allow',
+        'to_ports_app' => '2300,47624',
+        'proto'        => 'tcp'
+      },
+      'allow_homm_udp' => {
+        'ensure'       => 'present',
+        'action'       => 'allow',
+        'to_ports_app' => '2350,47624,10062,15114,16702,2252,29474,30957,33352,36197,37818,42268,46384,46747,48053,51514,58930,8470',
+        'proto'        => 'tcp'
+      },
+    },
+  }
 }
