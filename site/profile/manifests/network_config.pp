@@ -9,11 +9,9 @@ class profile::network_config {
   class { 'ufw':
     manage_package => true,
     package_name   => 'ufw',
-    package_ensure => 'present',
     manage_service => true,
     service_name   => 'ufw',
     service_ensure => 'running',
-    service_enable => true,
     rules          => {
       'allow_ssh'      => {
         'ensure'       => 'present',
