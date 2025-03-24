@@ -1,4 +1,255 @@
 ---
+network_config_files:
+  vpn_keys_dir:
+    path: /opt/vpn_keys
+    owner: root
+    group: root
+    mode: '0700'
+    ensure: directory
+  home_vpn_key:
+    path: /opt/vpn_keys/home_vpn.key
+    owner: root
+    group: root
+    mode: '0600'
+    ensure: file
+    show_diff: false
+    content: >
+      ENC[PKCS7,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
+      urofiITbsZrd5yoNKTH5eiDDY=]
+  home_vpn_crt:
+    path: /opt/vpn_keys/home_vpn.crt
+    owner: root
+    group: root
+    mode: '0600'
+    ensure: file
+    show_diff: false
+    content: >
+      ENC[PKCS7,MIIWLQYJKoZIhvcNAQcDoIIWHjCCFhoCAQAxggEhMIIBHQIBAD
+      AFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAOAFfVZKm0rtO6ys76eiNTXyAnS
+      MLH0QhBSov09EFthXqF8Hn8FEf0rwbKr1CvKR6D7mxfoI3n3jxr/+ASOdfG0
+      9Uuo4ElYEMPWX3YeocbBzZNTpsg0q1jfHIXiqXKd1HffeUKHQzH13wZ/sfmT
+      m1q4Hj0hLN2ZrFqaOYvG1RkgLGFmhaPmXTfANRgH32s/x7k+nxopmkHKndYN
+      19eFagFl7So0x7nB1arUVntOApQGXyllWJ2qIizreYB8fsCRzInqzAiveimP
+      CAj8i1N6Jh//0NblSMvp0jMcHn06Q4gjqPBurTtTHbO4SEZ2CkN2sYNi6WR4
+      2TfSdwI9KWq10sNjCCFO4GCSqGSIb3DQEHATAdBglghkgBZQMEASoEEC87A5
+      hIun0DLqgi8Em8UWSAghTAiltA3Lg3W7QIvP12szDAHK4ZT4FdhCiapdMjmA
+      UUNC7oxEPKRVvBmpOLv63cqaDjsl8wu0ltx0yB5caUGXgw/AyFqB8uemfU16
+      yI846X1MKi0Efhy8D78fKI6cnO8gas0EvyNQ3WDV/jW5K4FQKoYmLOcq7CTL
+      SGnqXMYcV5RHSrB3a0PnWyXwupodYezIm3Gc53C9FihKmljDI903qdtsnzRS
+      PmQcY/hk7r5DB9DVIBbmsGsoxbGFVgZkYz7RS/SghPn3tHMV5DFdzyhOU135
+      wBTwmU0qoOUxgIJYwdma1yJoJSIYYEe06up3C61Sn9bYK58bvwkFk4bflPw/
+      ZP76NumWSm/JgS3m9h8kHEBRPzFGEdPuk7um3CqacCSvj7W6MB/JOdpkO3pC
+      GIlIUhw+10XCVis574vTr8K79oD3niORaHNnzLOm6vE88MoG30eXdDX/bH3S
+      EEMNahfPpzSC6h2NaypSBxwTYoTN0+J65s5vtTi/EtKNDrsFS4VjnA7pg0yl
+      UB2Utd0q5qYq4InHk6ecy2YIUKHeJWcou0YrSENgNgtqDjU052ZDCChb2pZk
+      q0j0PlgOL8O9Kpf+g4PEL4VJLMAFQQDEaS4uM6w7P595O3VZyD1dRJFDg15R
+      0aB7z5HWqt7RjLaHa9nwNJmTdY2YZtUGbBVgeU/uj3jVLzVFNsvzKajqPM6g
+      FuF06HZ65+7DwSnrRZ3qudqz1HYRMJzzHf4Sy93fbO7sTyZhovb6gC0IKOSS
+      wbqeyOVowUuy3i9ZkcLa1+ksiTvYZnOpeJ4XGTY4V70Li7uf/PoBpPawYKAZ
+      h/Sm+WXVQ2uafknmy5fPLIh31wYv0BvRRQwHJipyLrtQN2ltrFpFI+peZMQR
+      ESEFuDoD8+i9Qs9wXdiDloeeE1h5mNh4Q5JqpGMjgYn4EMduq09afEsZ/zOY
+      bM/iVA4DVqAT19JgEMLp6V3AfHt4AgJrYKkfwGx4lRJ0lD0HpuyswHTYEzTm
+      2OEdSSHSEAsdiEAuPB0Gu9T7pf3PEyxpAFxMvV6YkfEyluqt/wH2JFP/v4vY
+      GATo6oXo/PE7Zg7BuI0kPQLCKghYC7u15mP7oQcyag/Dutgaiajrwep0JbFs
+      mJ9h048rv90V+DfFzI5uJMmXTC9bc4iB40Cushthh7jVJtK733ZGRFWMyECg
+      +13SjBDTToIaMmnzAq9qo+eLwhzY/2HrZ2SywmqvO9VECoos3KEP6jSt7apK
+      qW7xTHbQglY8GxcDbl2QvNZuo9wbDXfKoq9dwpnbI1UJdLMdzbOC0gPAbLX+
+      aKGo7YvGDNzvwQ2M4z2qtbetL21pgpvN6fPiSEL51Krr1jU2Dp4Kg404ylTa
+      jnhNWVtnrfSx1suOVD5uT3n3pVPvvEQIdq4qL5xtodfuIkAoq58wgMiymkcY
+      HtV8PW40rVh4M5qw1yGzPJdfcQTwK4sB4G1/60T96SWJH41ecjnWeEFNBNHZ
+      IvMCblQ3jJQQXXrXUzHgCpUhqZ471QCNSFnGg8qwIOynwp/n2L1vwUQNuOm3
+      1+ph82Zkk2SpiKKf3fZLwqJoPXEWiGnJ8ryjT9tGPjTUjHIHPW74ALeiSRZw
+      mizt0qBtOGeM0b0F6B5sJEJuM2KMNTLmaMOKFo6NpGsNZPm4d6SugGL52+40
+      L0lce5KaS24+nps1Yq+zLevmWHgxcZ7+Z1lGyP0FsLnAW06UZN4XY91imIJX
+      ocq2pSRkJmFMGhJK6EDaiosll9LwjfNNSPAh+iV3VJzO4Hma2qL69qRGop/6
+      6ea5y4WMhYyu3m9nsauuxxIFZb600DI3oOF82WIEEWLu6v9or9Ypi+wr7I0e
+      z8HtfB485E2l4mdpqPhOkJG1m47nnY1gn5Gc8eQb0CadUU49x8JCsKhnceB2
+      N9KyupK57snLgz3e7yHW4pJ2Ld7W8C8rV3GMzVXYI0WqyBs7SWzQZuLXYH2I
+      aNxsNvPCRFbzGZOlEbw6CM1YDsp8Phua/HPxOPUktEbTXyN6Nn/7pfcZ1ZDW
+      KztjT9HacwT7mDi41wuXZs5o+yeHH1VB1vK+h07/233VFUax2lIUm3F04/bD
+      aKc1suG4OBA56scqA5sEG6UAHw1IFH5LvX15qwnW0RFk1pcKnRMHv37E44w6
+      Nzm22jcesEcVaGMz3sXnCoL9r7E1VP4h4SMzPC0DUYLg5ygMX1pzfUQqzc4Y
+      /gUpU9u3ZSskmKP2QxXpc6Nwf6JwSbVRcr0O4rqNVViaScKltEtkiy4VoYQN
+      Q6Pci+fS8ufwcqsiN5d9ZH94F7iWAMvaY00BOwUDK7oOuwId6uWae44CpE5W
+      MT0tM9FumWM8PGwfxNs0O02w+DRII+FXRKQd3G5VWVlIy/9y3niYNCCJpT+r
+      piBf7vzxKddAM64QlS/ww5voLyPml5EBzzTTWAE+FOPmf2qb1+vmJnOxjV6L
+      hWEVv17o5rfFOWJz5RolvP+3JhTlaMx49iSLHfDbcet4ZCJ3WlE87K03Cimo
+      ccYxyj7OSBliUQe4Uim82D7R50aU4yNkz6oNTVjKrMWfdZC/eGFEN+Z9cL/x
+      xrtYlBiDhfKuJ/FMI4VRlOLmg3VPug7NhPwH5q+/5FltGdOS+n0/8qeL1+qM
+      Vun1125mtw62p/X0pWycMVw+3FuLZJlv5BJ1O1SmWGyj++PJIcX3gEXcrIAK
+      0/JZrcm7qAl3/0ShysO9m9awTEkCbsnU5/bJH+RkW/TQ6nl/LiZ4RmriJSqh
+      hrqsbM9ZWIX1aWTy4PK+ItNJCjzIJgLyF/OTI9OIBuLk7cz61W7MueGfOrYn
+      j2H55u58wDVAyVqXka9gfMg9gwfUo2CUXCg5eeSbQJ4t9w/5g3MYHJ6xj29E
+      EpzMDH6Vufirw4bD/QsSiWd2NlgjHBSFjIUkTaJUsEl3lu8P601ObO0w1Kw3
+      MmCPeYYNXxjgyRTAV4qj2d0C7mfUepaXajAdUN0G9keJLwJP/cspye2DEtcq
+      SBLJ8/uJWdAD5l49Y8nQZ83F1iPlUYNF/yEOZ9x7xh5V2dc0PtMWgeCL2z31
+      fcIy8X990d0IKktlLQihR4FYbx3xf6h7+RmDYipO2C7gANonGo4UL7bOjFp1
+      u9RHmBJKlClE8SaLo72RwaDZ6DUBSjZvMfIsKgS/CjF/S5XO0MSsT7BncdIx
+      H29eXsRpaHjscI+TNQZsyv2MjdbBeJYgd5Ih7Pgw1KfTjVX6OX5drT3fZ2CY
+      EZJebhmXrQemXxOXofp1cEHAsLsyhapyaey8LqVXWrcBuUr08RiAVUewb5+l
+      vvq1BihnVr4fJqjVg30yKzwjTd7QBPZqLktCW86l4hgyLznqUefO61BPYDxO
+      tX/UEJ7HHOswlRWQ8pdVG7mLaZ21aIT5PYzWzaVzn/F3lVrQ2enkfDywLQTM
+      MKsLmIOOrPwZFybJ4S4NYpu5HDR/LNYmFwkLwdw38e91xgiu4nGK7S2qEJyA
+      0okM08rr6NrtAtf88BW8fz1zN4A3cUi9R6r+TWQFvvwS2atojDkUkb2OSTqf
+      U+NpTVAi56mXeoVWIgfivQpy/qaiKq5t+XRQoTme8JxKNFk8Yqp2I4qBgfgk
+      RF6WUVs0K93hHtWziQ7AAQ2Pkxda/GXxz4mbCpnpK9f4fTg+FMQcaZ2Kvkuv
+      JM0eudlstNjPWcEHk/Hotbqd2ghA1C2OWKUjHLQXT3d+9w+T8HI3HQLhKm55
+      A5ssMCmthVhPhi3e3yu+GRx9tHia63JzN3sCKAPWMXbBpTrv8m3o+xAnbFrv
+      uRi5/BSK9fBJ59aJhPX7cV0MtHqx8nUPyiUo3rGepVHnvQbcbuGRq5EYz6qj
+      loPLN7oQePZUMhO7ybAKhFyPCViRekee5jBIce56SdCZxwajxtf6KRjbDXv/
+      bd0vFpdeohbQPrNQl4vvL1keYEfPM59jEc61c9j76/g4DkeAhv/5/Ul10dah
+      L8XQuUrL4CWCfjeg9WjVljxnD8qbeNJaeFRvLNERDHeEOkeIIxpvSJHIawxD
+      uKfATaLA17XGZe0PC0lsAvItw1FZbbBfjG+mIjIKG5Gf6NtGn3mnLqvsaox8
+      yOezkF6ubD7/Qj+8O7E1YhoaAuu0Em0GmSsKNaPlafU4Jg0BUwB2LKStVOwi
+      Mh5OIsOwNcK/LIfOf3ZX8SkEXlGTRlX+7eDOPWC7nJfGmitIFPzZGWbCP6Be
+      VQ/6xZF347T/sB/xiXwpBKldcmihKHa4kjghc0Uo0ChahpTCbD8yML8QJaix
+      sDR4NenobAeqNOxdN7Yvpqp3yY3qmetXJAuRPpmg94N6NKQL5MvS2T1mqDS7
+      jTWjd7bDPBQZ4DktWblpl8LsUBaKq0wida8CKPMdFX+rdIMOrXheHw2WcZU3
+      +ciPBE7augz/JGFywCPLUrTrgh6KCrOD6dmQXh3b5yqsHWEV2kYFrg+WFCyn
+      fFXXRnhb5RybYtn+cMWk/BYnOlBAyKroofZQ+NUUu74bUyu39xblerFrEBdy
+      VexTS7zHCdFjW0BtzmFHROaFGc2MzL275cfs/Ow0qERI6SpQI7GSpwllSoGW
+      bOswtqwTwhe9tJ9yCpbRWHTxKgLv9zlfaoMVx7Jp4lT9Vh12UKpuSmZey9KY
+      T+PLjLGFyo9QXaCBdoQbLp8Wmv5QUcKl1mmGj6YBZlPKeKd5HOzRUSceR2bE
+      msprWVSooSOzeeXIkjbCl4LrwgiirzV2k7NRoSFGS2ujeJ7cXvT54P/uZWiy
+      K+mAydEFNYD2Pg8pANpfkFZuOW7nSSJncxCiDf+8g+NnNoaH+mp1jUYeJd89
+      gMDn4pNgmWP9fKv/4wD+w36YIzdLCz03eu8dhcgwyk+w3sETjvN0Ga6WVr2J
+      GAyYV59szbE6yVlr/7HN/gzOfA0+kxOuHspATWJnPVxWuFMc734S6fFfO17J
+      Rx12mfXENqDoa1uyUVMESn218MLow0SDVw3o8zX3vq3NxWvAkDczJ21I3gG+
+      5822eogL/948V/X1kK+BXyDpamnDgP1ajsb6ZKOT/2vTwKsmxfiwKg79YvkE
+      y9bZ9B41WEWqsTK6DX85DwkZ15bPjHLoo/DcynxFtUgOxrrBkfc8BtT0pg4P
+      jojE6GvzyKYB7XggeEC948XBRyq4ubMaLTdA7h58JFkXsfJBUB8Oa8Uwu+zn
+      /G0t7pdfTlnyY44Z/EOJfDYiu5hHwOkLOpOYaY7rbif5l1qtZ710YpHLctjF
+      5HcQ8SaWN3gavfvkv66KLlgWuwZvqAxY4+92TJykxhh7kSbAIECd1+lHbRLm
+      hbnfeAHXZy3cz1fhseipctdV60ELWLHXLirfTyY29nMpEKRQkNoXnoXLWTLZ
+      ZG+7TqwOTBA1HLrC6NpgTEMutkqE2yZizfHMKj0SIu6EnqCSRhQxj+GKAGUl
+      GX/tu1AIUVJg27sWqIeBn81s9J8k3KBZdR9dXgDn8qU3jjRJSlm4oZFIashF
+      Jv9OHCSBj/zj9hFvyFlEWdE1jq4Rf0KGa0ksNaIS/dSiBhakf9Sfk4Q7yZ/b
+      1TNx0Cc9d3fHlGIy10RB4zWhRdb5pcF+KVTOyg5k7polpOWheh40nIcUKPZu
+      eTYmrMnj+G3IMTvmUzgpvOi9tHgRIaP7k1BYRwWiGLDywxekTay2yG78nJti
+      O1MxLjBoqWcmd1JHw670b1TDnwl+7tv2+sST9RK4prbjykc0WFQAi2MI8s6b
+      7nZvhw8uA3rKo/MHdfZliiPwU2bCfGRWkyo4/LQ7pGXj7cXngfWgqAp42zLt
+      and3UaZoD9n5VZ46voDxoG41UUWxwH7T3fFKKEHmAEZ6Mh2lgKaYLmtEG8w0
+      10mHuX9xOci2545sLa1dUcY8dh8Bx112+jCekR7boAyGPjuML00aOsjqxIvY
+      Ab2a23Ws8M0d/WddwMXZmiCfRzP44q1yrA7Mm9EtrH/hfi0bdnC7GcQtky8b
+      OfbEyuUaHiQBalFGG0MHZwrx7dPJz/ES2XwEXKjaoQSP+UhNfUb5qSPbO3uH
+      yKe4j3VAn5DuoU/rC+9md5JHi3UYQ/5ETmMKGtb8iPDIaBtclsV21E73qlKZ
+      RXG2f7Xju9y7QPDUPAE0IdaVSzANJAxXaHVMQJf3cPorb8+/lulDkScCzWoR
+      1G/OV5lUP027y96ZO8AcUsSZjDQgEzJhVFOkjxi/b+W24lQeUoBBNOkNeU3J
+      RTI0RffXhWpO3GqRgIqT3ZeDcSRRoXb8r5k7eRYhrGxss32xqta/5hunSnVf
+      DdlQ7iewz42ycm1jmirtHnqVpO9FbKbdwnc3wN0DlMh7gFiVxyl2kDp1b9ik
+      jOHKQW75eMtoIlT7OQCAfmE8AEEW6eud9JHpZB0VIzODyb+Hfu32uEEtzJOm
+      21/c/Mo0lcRzz65t+DpqTvK9ivuOGGI1spaXm8mW82w+gZnvXI0T8V4axHEQ
+      yIpBLTIChK1bMu2hx+nV4eW0Vhkwu79EzQvmhTYTeiDyoKga/Ji4IVX06rJ7
+      A5iOSEzNs3208q74fgE/uOYeKuqIdME8l0QLsHscq8fQtnwCoIZpdFLcGAhm
+      TxGE14Oidm6ngge864YkqPB21COxXzaYfvK8OhBn2x+yb0KIp4MG1Qr0UmFd
+      KqaqvGjjN1RUevv5+uj6uhOZkA/N8BvijwNOwqxDhpaLX9P5GGMWccpCc5CM
+      Zh9N7ELKTmUVwhfg869JIw+qz5ewBbbxrO95rVcZFHKeVJHB+ZMlieEMgEt7
+      grxRF+E6muPrdtZ5vNWl2YfR+owcrX/PMJFCyhKht71gA3FB7KDd/8YCXhmv
+      A7AQ5BCarqGUuaEO+YG8NTckaglZeV7NNDKx9g0A69fimPO0rN77Bko4oPbS
+      QcvZnyvClg+Rta7LIZfs/hAq6mXKzMzUc2cWfgOyTIDUBUPwBlbE1Q1hnZCv
+      8QmPTkes0+SbxW3g1puPQqmeyEmni9A8xxksDj8b7u3JjPLxjjExr95DSLut
+      OD73UTkeOj0DqjtdA4STUxmSY42jkGr6ZIBFmMkk5xJrkAN9nQ9wmpVJQVEX
+      /3jzjZgtBbUtd9AxBuEZYUZzyhfE17d3VSAB5LKNkVXX3hWfUdD4n+46KFt1
+      IWw+fzb6tRGwUHBcvPRz37lhc=]
+  home_vpn_ca:
+    path: /opt/vpn_keys/home_vpn_ca.crt
+    owner: root
+    group: root
+    mode: '0600'
+    ensure: file
+    show_diff: false
+    content: >
+      ENC[PKCS7,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
+      ==]
 network_config:
   ass-teriks:
     content:
@@ -51,3 +302,28 @@ network_config:
       ipv6:
         dns-search: ''
         method: auto
+  home_vpn:
+    content:
+      connection:
+        id: ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAC1bJpTYZmMg+oPrkBPwEjmWcaOJWq1s1lZHYQtHfzMNF/l0g0ZVueYKjTI5vLiKlDngo93zzCH5J601guL5t7yS8ZDPcfr425BONOoS6uFs+GkH1Mff8jZPSIF4k/vNoyqDzxabCFYgpkX4UxDUJRdOf0oJcKB5v5/6id19exEfbdcmkJ9X5uSHXRTSPgWk+RPYN9jVn3EKMF22QMVJegqz8y8VeSwoxTYR43rPPw4r7dkKk5nXqbbFfWihqXzz9bHGOelS2XSnNVnr4ZIaULsZeb+yUafpKoeHWjaF0x4MxscA6fSBjfLRBh6qalv0YHjRBcKHpa6mIlj1MgHAeDTA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBAM/LK6X7ioaj5kVUzzBooRgBAysAEMleSPYQ8OZ4nFLY86]
+        type: vpn
+        autoconnect: 'false'
+      vpn:
+        remote: ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAAHvh1UciDdXrZqzX9pG4AQRPYqJPLxUFDBvIgEOPv/Knmr+xX7GrSrW9oOGHhOZqpueW6OKW5ZtorpouQOCxfR2oYntrni32A3W6TGY8dWbuLlg5lPyiWokImykVT/EOTVzfq5UCFmpn3l0eN60K8KfeFvZQBPyVNSrLYRyDjDOA0mfTewUg8Ha04c78XOP8nof4zawyzP4M1rVyZ62P0gtwbjd3B5jEjT5X44wBKWwTl1VreJTBPm1DG6SUijGkgKmDxmo9F03Lt6fVjKNcz7D1KaRWOZMpA/TNnJgi7mfv/3Hulup2+P3aX4hzN8W0P7KTmCWeKtEsQHHmtYA0PTA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBDr0rOnTSwMRmL9gnlx3MJkgBBDd9tvp2OnmRb8VF3vwNm6]
+        service-type: 'org.freedesktop.NetworkManager.openvpn'
+        auth: 'SHA1'
+        cert-pass-flags: 0
+        cipher: 'AES-256-CBC'
+        connection-type: 'tls'
+        proto-tcp: 'yes'
+        ca: /opt/vpn_keys/home_vpn_ca.crt
+        cert: /opt/vpn_keys/home_vpn.crt
+        key: /opt/vpn_keys/home_vpn.key
+      ipv4:
+        dns-search: ''
+        method: 'auto'
+        never-default: 'true'
+      ipv6:
+        dns-search: ''
+        method: 'auto'
+        addr-gen-mode: 'stable-privacy'
