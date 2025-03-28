@@ -1,0 +1,4 @@
+[HoMM]
+title=Heroes of Might and Magic III
+description=Heroes of Might and Magic III LAN Multiplayer
+ports=2300,47624/tcp|2350,47624,10062,15114,16702,2252,29474,30957,33352/udp|36197,37818,42268,46384,46747,48053,51514,58930,8470/udp

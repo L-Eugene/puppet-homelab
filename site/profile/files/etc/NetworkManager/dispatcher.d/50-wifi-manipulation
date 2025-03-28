@@ -1,0 +1,29 @@
+#!/bin/bash
+export LC_ALL=C
+
+enable_disable_wifi ()
+{
+    # Ignore events from wireless interfaces to allow manually turn on Wi-Fi while ethernet is up
+    # Virtual box interfaces are also ethernet devices, so setting up vbox net may break wifi
+    [[ "$DEVICE_IFACE" =~ ^wl|^vbox ]] && return 0
+
+    # Mikrotik Static is connection to directly connect to non-configured routers
+    # Do not count it as active connection because it can be limited
+    # 
+    # Also skipping vboxnet devices because they're not real ethernet interfaces
+    result=$(nmcli dev | grep -w "ethernet" | grep -v "vboxnet" | grep -w "connected" | grep -v "Mikrotik Static")
+
+    if [ -n "$result" ]; then
+        nmcli radio wifi off
+    else
+        nmcli radio wifi on
+    fi
+}
+
+if [ "$2" = "up" ]; then
+    enable_disable_wifi
+fi
+
+if [ "$2" = "down" ]; then
+    enable_disable_wifi
+fi

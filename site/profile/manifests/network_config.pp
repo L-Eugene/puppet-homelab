@@ -7,14 +7,9 @@ class profile::network_config {
   create_resources('networkmanager::connection', $configs)
 
   file { 'homm_ufw_app':
-    ensure  => 'file',
-    path    => '/etc/ufw/applications.d/homm',
-    content => @(EOD)
-    [HoMM]
-    title=Heroes of Might and Magic III
-    description=Heroes of Might and Magic III LAN Multiplayer
-    ports=2300,47624/tcp|2350,47624,10062,15114,16702,2252,29474,30957,33352/udp|36197,37818,42268,46384,46747,48053,51514,58930,8470/udp
-    |-EOD
+    ensure => 'file',
+    path   => '/etc/ufw/applications.d/homm',
+    source => 'puppet:///modules/profile/etc/ufw/applications.d/homm'
   }
 
   class { 'ufw':
@@ -37,5 +32,24 @@ class profile::network_config {
         'to_ports_app' => 'HoMM',
       },
     },
+  }
+
+  $network_auto_scripts = ['50-wifi-manipulation', '51-dns-routes', 'ipv4lib.sh' ]
+  $network_auto_scripts.each |$script| {
+    file { "network_auto_script_${script}":
+      ensure => 'file',
+      path   => "/etc/NetworkManager/dispatcher.d/${script}",
+      source => "puppet:///modules/profile/etc/NetworkManager/dispatcher.d/${script}",
+      mode   => '0700',
+      owner  => 'root',
+      group  => 'root',
+      notify => Service['NetworkManager'],
+    }
+  }
+
+  service { 'NetworkManager':
+    ensure     => 'running',
+    enable     => true,
+    hasrestart => true,
   }
 }

@@ -1,0 +1,13 @@
+#!/bin/bash
+export LC_ALL=C
+
+. `dirname -- "$0"`/ipv4lib.sh
+
+if [ "$2" == "up" -a -n "$IP4_GATEWAY" -a -n "$IP4_NAMESERVERS" ]; then
+        for nameserver in $IP4_NAMESERVERS
+        do
+                # No need to add a route if the nameserver is already in any of our networks
+                in_any_net $nameserver && continue
+                ip route add "$nameserver/32" via "$IP4_GATEWAY" dev "$1"
+        done
+fi
