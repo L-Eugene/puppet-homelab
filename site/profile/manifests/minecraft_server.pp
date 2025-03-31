@@ -9,25 +9,28 @@ class profile::minecraft_server {
 
   file { '/opt/minecraft/docker-compose.yml':
     ensure  => file,
+    require => File['/opt/minecraft'],
+    notify  => Service['minecraft.service'],
     content => @("EOF")
-      version: '3'
-      services:
-        mc:
-          image: itzg/minecraft-server
-          environment:
-            EULA: "true"
-            TYPE: "FABRIC"
-            PLUGINS: |
-              https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/fabric
-              https://modrinth.com/project/bWrNNfkb/version/jb3lzved
-              https://cdn.modrinth.com/data/P7dR8mSH/versions/15ijyoD6/fabric-api-0.113.0%2B1.21.4.jar
-          ports:
-            - "25565:25565"
-            - "19132:19132/udp"
-          volumes:
-            - ./data:/data
-          restart: unless-stopped
-    EOF
+    version: '3'
+    services:
+      mc:
+        image: itzg/minecraft-server
+        environment:
+          EULA: "true"
+          TYPE: "FABRIC"
+          PLUGINS: |
+            https://cdn.modrinth.com/data/P7dR8mSH/versions/rYSz5dRU/fabric-api-0.119.6%2B1.21.5.jar
+            https://cdn.modrinth.com/data/9eGKb6K1/versions/8NDcr1mc/voicechat-fabric-1.21.5-2.5.28.jar
+        ports:
+          - "25565:25565"
+          - "24454:24454/udp"
+          - "19132:19132/udp"
+        volumes:
+          - ./data:/data
+        restart: unless-stopped
+
+    |-EOF
   }
 
   systemd::manage_unit { 'minecraft.service':
