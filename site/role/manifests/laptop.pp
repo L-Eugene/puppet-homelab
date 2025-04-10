@@ -2,4 +2,5 @@
 class role::laptop {
   include profile::lab_timezone
   include profile::network_config
+  include profile::desktop_repos
 }
