@@ -5,20 +5,6 @@ class profile::desktop_repos {
     ensure => installed,
   }
 
-  apt::source { 'deb_opera_com_repo':
-    location      => 'https://deb.opera.com/opera-stable/',
-    release       => 'jammy',
-    repos         => ['stable', 'non-free'],
-    architecture  => 'amd64',
-    include       => {
-      src => false,
-    },
-    key           => {
-      id     => '9701D4A1B4D92E261C8C66FE24A1004B1F11DCC9',
-      source => 'https://deb.opera.com/archive.key',
-    },
-    notify_update => true,
-  }
   apt::source { 'docker_repo':
     location      => 'https://download.docker.com/linux/ubuntu',
     release       => 'jammy',
