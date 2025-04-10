@@ -5,6 +5,13 @@ class profile::desktop_repos {
     ensure => installed,
   }
 
+  # Install the Puppet 7 release package from a URL
+  package { 'puppet7-release':
+    ensure   => installed,
+    source   => 'https://apt-puppetcore.puppet.com/public/puppet7-release-jammy.deb',
+    provider => 'dpkg',
+  }
+
   apt::source { 'docker_repo':
     location      => 'https://download.docker.com/linux/ubuntu',
     release       => 'jammy',
