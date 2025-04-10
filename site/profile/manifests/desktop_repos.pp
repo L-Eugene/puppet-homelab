@@ -22,7 +22,7 @@ class profile::desktop_repos {
   apt::source { 'docker_repo':
     location      => 'https://download.docker.com/linux/ubuntu',
     release       => 'jammy',
-    repos         => ['stable'],
+    repos         => 'stable',
     architecture  => 'amd64',
     include       => {
       src => false,
