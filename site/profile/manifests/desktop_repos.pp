@@ -5,10 +5,16 @@ class profile::desktop_repos {
     ensure => installed,
   }
 
+  # Download the Puppet 7 release package to /opt
+  file { '/opt/puppet7-release-jammy.deb':
+    ensure => file,
+    source => 'https://apt-puppetcore.puppet.com/public/puppet7-release-jammy.deb',
+  }
+
   # Install the Puppet 7 release package from a URL
   package { 'puppet7-release':
     ensure   => installed,
-    source   => 'https://apt-puppetcore.puppet.com/public/puppet7-release-jammy.deb',
+    source   => '/opt/puppet7-release-jammy.deb',
     provider => 'dpkg',
   }
 
