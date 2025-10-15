@@ -6,7 +6,9 @@
             <%-
         }
     } else {
+        if $value != undef {
         -%><%= $key %> <%= $value %>
         <%-
+        }
     }
 } -%>

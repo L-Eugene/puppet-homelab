@@ -62,18 +62,18 @@ class profile::vpn_private {
             '"route 192.168.116.0 255.255.255.0"',
         ],
         'client-config-dir' => '/etc/openvpn/server/ccd',
-        'client-to-client' => undef,
+        'client-to-client' => '',
         'keepalive' => '10 120',
         'cipher' => 'AES-256-CBC',
         'auth' => 'SHA1',
-        'persist-key' => undef,
-        'persist-tun' => undef
+        'persist-key' => '',
+        'persist-tun' => ''
     },
-    ccd_options => {
-      'sofia' => { 'iroute' => '192.168.116.0 255.255.255.0' },
-      'gaidara' => { 'iroute' => '192.168.14.0 255.255.255.0' },
-      'chonki' => { 'iroute' => '192.168.92.0 255.255.255.0' },
-      'amur-comp' => { 'iroute' => '192.168.32.0 255.255.255.0' }
+    ccd_options   => {
+      'sofia'     => { 'iroute' => '192.168.116.0 255.255.255.0' },
+      'gaidara'   => { 'iroute' => '192.168.14.0 255.255.255.0' },
+      'chonki'    => { 'iroute' => '192.168.92.0 255.255.255.0' },
+      'amur-comp' => { 'iroute' => '192.168.32.0 255.255.255.0' },
     }
   }
 }

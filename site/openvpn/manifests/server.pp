@@ -8,7 +8,6 @@ define openvpn::server (
         'proto' => "udp",
         'dev' => "tun",
         'topology' => "subnet",
-        'server' => "10.0.0.0 255.255.255.0",
         'user' => 'nobody',
         'group' => 'nogroup',
         'status' => "openvpn-$server_name-status.log",

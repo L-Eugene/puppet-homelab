@@ -60,13 +60,13 @@ class profile::vpn_academy {
             '"route 192.168.20.0 255.255.255.0"',
         ],
         'client-config-dir' => '/etc/openvpn/academy/ccd',
-        'client-to-client' => undef,
+        'client-to-client' => '',
         'keepalive' => '10 120',
         'cipher' => 'AES-256-CBC',
         'auth' => 'SHA1',
         'max-clients' => 100,
-        'persist-key' => undef,
-        'persist-tun' => undef
+        'persist-key' => '',
+        'persist-tun' => '',
     },
     ccd_options => {
       'itacademy-mikrotik' => { 
