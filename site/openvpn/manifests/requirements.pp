@@ -3,4 +3,9 @@ class openvpn::requirements {
     package { 'openvpn':
         ensure => installed,
     }
+
+    # Remove unmanaged firewall rules
+    resources { 'firewall':
+        purge => true,
+    }
 }

@@ -76,4 +76,17 @@ class profile::vpn_private {
       'amur-comp' => { 'iroute' => '192.168.32.0 255.255.255.0' },
     }
   }
+
+  firewall { '100 snat for private openvpn':
+    chain    => 'POSTROUTING',
+    jump     => 'MASQUERADE',
+    proto    => 'all',
+    outiface => 'eth0',
+    source   => '10.201.0.0/24',
+    table    => 'nat',
+  }
+
+  sysctl { 'net.ipv4.ip_forward':
+    value => 1,
+  }
 }
