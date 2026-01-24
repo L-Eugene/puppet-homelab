@@ -1,46 +1,50 @@
 class profile::gnucash_database {
   $gnucash_users = lookup('gnucash_users')
 
-  mysql::db { 'gnucash':
-    user           => $gnucash_users[0]['username'],
-    password       => $gnucash_users[0]['password'],
-    host           => '%',
-    grant          => $gnucash_users[0]['grant'],
+  $databases = ['gnucash', 'gnucash_euro', 'gnucash_chgk']
 
-    sql            => ['/backup/homelab/gnucash-latest.sql.bz2'],
-    import_cat_cmd => 'bzcat',
-    enforce_sql    => false,
-  }
+  $databases.each |$db_name| {
+    mysql::db { $db_name:
+      user           => $gnucash_users[0]['username'],
+      password       => $gnucash_users[0]['password'],
+      host           => '%',
+      grant          => $gnucash_users[0]['grant'],
 
-  $gnucash_users.each |$user| {
-    if $user['username'] == $gnucash_users[0]['username'] {
-      # Skipping the first user as it's already created and granted
-      next()
+      sql            => ["/backup/homelab/${db_name}-latest.sql.bz2"],
+      import_cat_cmd => 'bzcat',
+      enforce_sql    => false,
     }
 
-    mysql_user { "${$user['username']}@%":
-      password_hash => mysql::password($user['password']),
+    $gnucash_users.each |$user| {
+      if $user['username'] == $gnucash_users[0]['username'] {
+        # Skipping the first user as it's already created and granted
+        next()
+      }
+
+      mysql_user { "${$user['username']}@%":
+        password_hash => mysql::password($user['password']),
+      }
+
+      mysql_grant { "${$user['username']}@%/${db_name}.*":
+        user       => "${$user['username']}@%",
+        privileges => $user['grant'],
+        table      => "${db_name}.*",
+      }
+
+      # Even for readonly accounts GnuCash is trying to do some write operations
+      # https://bugs.gnucash.org/show_bug.cgi?id=645216
+      mysql_grant { "${$user['username']}@%/${db_name}.numtest":
+        user       => "${$user['username']}@%",
+        privileges => 'ALL',
+        table      => "${db_name}.numtest",
+      }
     }
 
-    mysql_grant { "${$user['username']}@%/gnucash.*":
-      user       => "${$user['username']}@%",
-      privileges => $user['grant'],
-      table      => 'gnucash.*',
+    cron { "backup-${db_name}-db":
+      command => "/root/database-backup.sh ${db_name}",
+      user    => 'root',
+      hour    => 3,
+      minute  => 0,
     }
-
-    # Even for readonly accounts GnuCash is trying to do some write operations
-    # https://bugs.gnucash.org/show_bug.cgi?id=645216
-    mysql_grant { "${$user['username']}@%/gnucash.numtest":
-      user       => "${$user['username']}@%",
-      privileges => 'ALL',
-      table      => 'gnucash.numtest',
-    }
-  }
-
-  cron { 'backup-gnucash-db':
-    command => '/root/database-backup.sh gnucash',
-    user    => 'root',
-    hour    => 3,
-    minute  => 0,
   }
 }
