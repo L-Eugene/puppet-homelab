@@ -15,16 +15,25 @@ class profile::gnucash_database {
       enforce_sql    => false,
     }
 
-    $gnucash_users.each |$user| {
-      if $user['username'] == $gnucash_users[0]['username'] {
-        # Skipping the first user as it's already created and granted
-        next()
-      }
+    cron { "backup-${db_name}-db":
+      command => "/root/database-backup.sh ${db_name}",
+      user    => 'root',
+      hour    => 3,
+      minute  => 0,
+    }
+  }
 
-      mysql_user { "${$user['username']}@%":
-        password_hash => mysql::password($user['password']),
-      }
+  $gnucash_users.each |$user| {
+    if $user['username'] == $gnucash_users[0]['username'] {
+      # Skipping the first user as it's already created and granted
+      next()
+    }
 
+    mysql_user { "${$user['username']}@%":
+      password_hash => mysql::password($user['password']),
+    }
+
+    $databases.each |$db_name| {
       mysql_grant { "${$user['username']}@%/${db_name}.*":
         user       => "${$user['username']}@%",
         privileges => $user['grant'],
@@ -39,12 +48,6 @@ class profile::gnucash_database {
         table      => "${db_name}.numtest",
       }
     }
-
-    cron { "backup-${db_name}-db":
-      command => "/root/database-backup.sh ${db_name}",
-      user    => 'root',
-      hour    => 3,
-      minute  => 0,
-    }
   }
+
 }
