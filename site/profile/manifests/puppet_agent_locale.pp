@@ -36,11 +36,5 @@ Environment=LC_ALL=${lc_all}
     command     => '/bin/systemctl daemon-reload',
     path        => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
     refreshonly => true,
-    notify      => Service['puppet-agent'],
-  }
-
-  service { 'puppet-agent':
-    ensure => running,
-    enable => true,
   }
 }
