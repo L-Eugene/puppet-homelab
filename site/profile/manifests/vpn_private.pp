@@ -98,7 +98,18 @@ class profile::vpn_private {
     table    => 'nat',
   }
 
-  sysctl { 'net.ipv4.ip_forward':
-    value => 1,
+  file { '/etc/sysctl.d/99-vpn-private-ip-forward.conf':
+    ensure  => file,
+    mode    => '0644',
+    owner   => root,
+    group   => root,
+    content => "net.ipv4.ip_forward = 1\n",
+    notify  => Exec['reload-sysctl-vpn-private'],
+  }
+
+  exec { 'reload-sysctl-vpn-private':
+    command     => '/sbin/sysctl --system',
+    path        => ['/usr/sbin', '/usr/bin', '/sbin', '/bin'],
+    refreshonly => true,
   }
 }
