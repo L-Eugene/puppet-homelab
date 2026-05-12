@@ -20,3 +20,7 @@ node 'openvpn.lan' {
 node 'minecraft.lan' {
   include role::minecraft_server
 }
+
+node 'mediaserver.lan' {
+  include role::media_server
+}
