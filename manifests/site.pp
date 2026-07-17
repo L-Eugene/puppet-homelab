@@ -24,3 +24,11 @@ node 'minecraft.lan' {
 node 'mediaserver.lan' {
   include role::media_server
 }
+
+node 'oasis' {
+  include role::media_server
+}
+
+node 'galeon' {
+  include role::development_machine
+}
