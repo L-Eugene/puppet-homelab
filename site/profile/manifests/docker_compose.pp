@@ -8,7 +8,6 @@ class profile::docker_compose {
     class { 'docker':
       log_driver                   => 'journald',
       use_upstream_package_source  => false,
-      package_name                 => 'docker.io',
     }
     
     # Install docker-compose-v2 from Ubuntu repos (module hardcodes docker-compose-plugin)
