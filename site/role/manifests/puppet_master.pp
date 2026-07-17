@@ -1,5 +1,7 @@
 class role::puppet_master {
-  include profile::lab_timezone
+  class { 'profile::timezone':
+    timezone => 'Europe/Sofia',
+  }
   include profile::hiera_eyaml
   include profile::puppet_cleanup_reports
 }

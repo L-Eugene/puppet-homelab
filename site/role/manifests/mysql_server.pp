@@ -1,5 +1,7 @@
 class role::mysql_server {
-  include profile::lab_timezone
+  class { 'profile::timezone':
+    timezone => 'Europe/Sofia',
+  }
   include profile::mysql_server
   include profile::amazon_s3_backup
   include profile::gnucash_database

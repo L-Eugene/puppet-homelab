@@ -6,7 +6,9 @@
 # Example:
 #   include role::bot_server
 class role::bot_server {
-  include profile::lab_timezone
+  class { 'profile::timezone':
+    timezone => 'Europe/Sofia',
+  }
   include profile::docker_compose
   include profile::vkinformerbot
   include profile::bablobot
