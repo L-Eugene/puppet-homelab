@@ -11,13 +11,13 @@ class profile::torrentbot {
 
   archive { "${torrentbot_dir}/docker-compose.yml":
     ensure  => present,
-    source  => 'https://raw.githubusercontent.com/L-Eugene/torrentbot/main/docker-compose.yml',
+    source  => 'https://raw.githubusercontent.com/OksLo/torrentbot/main/docker-compose.yml',
     require => File[$torrentbot_dir],
   }
 
   archive { "${torrentbot_dir}/setup.py":
     ensure  => present,
-    source  => 'https://raw.githubusercontent.com/L-Eugene/torrentbot/main/setup.py',
+    source  => 'https://raw.githubusercontent.com/OksLo/torrentbot/main/setup.py',
     require => File[$torrentbot_dir],
   }
 
