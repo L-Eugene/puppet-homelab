@@ -6,8 +6,9 @@ class profile::docker_compose {
   if $use_ubuntu_repo {
     # Use official Ubuntu repositories for Ubuntu 26.04+
     class { 'docker':
-      log_driver                   => 'journald',
-      use_upstream_package_source  => false,
+      log_driver                 => 'journald',
+      use_upstream_package_source => false,
+      docker_ce_package_name     => 'docker.io',
     }
     
     # Install docker-compose-v2 from Ubuntu repos (module hardcodes docker-compose-plugin)
