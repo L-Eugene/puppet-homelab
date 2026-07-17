@@ -10,13 +10,19 @@ class profile::docker_compose {
       use_upstream_package_source  => false,
       package_name                 => 'docker.io',
     }
+    
+    # Install docker-compose-v2 from Ubuntu repos (module hardcodes docker-compose-plugin)
+    package { 'docker-compose-v2':
+      ensure => present,
+    }
   } else {
     # Use upstream Docker repositories for earlier Ubuntu versions
     class { 'docker':
       log_driver                   => 'journald',
       use_upstream_package_source  => true,
     }
+    
+    # Use module's default docker-compose-plugin package for upstream repos
+    include 'docker::compose'
   }
-
-  include 'docker::compose'
 }
