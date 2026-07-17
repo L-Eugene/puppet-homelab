@@ -1,0 +1,4 @@
+
+# puppet forge modules
+mod 'puppetlabs/stdlib'          , '4.9.0'
+mod 'puppetlabs/vcsrepo'         , '1.3.2'

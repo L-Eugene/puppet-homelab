@@ -4,7 +4,7 @@
     "author": "elapeko",
     "summary": "Install and configure OpenVPN server",
     "dependencies": [
-        { "name": "puppet-systemd", "version_requirement": ">= 5.0.0 < 6.0.0" }
+        { "name": "puppet-systemd", "version_requirement": ">= 5.0.0 < 7.0.0" }
     ],
     "license": "Unlicense",
     "source": "None"

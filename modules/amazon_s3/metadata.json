@@ -1,0 +1,45 @@
+{
+  "name": "landcareresearch-amazon_s3",
+  "author": "Landcare Research",
+  "summary": "Manages mounting S3 buckets",
+  "license": "GPL-3.0+",
+  "source": "https://bitbucket.org/landcareresearch/puppet-amazon-s3",
+  "project_page": "https://bitbucket.org/landcareresearch/puppet-amazon-s3",
+  "issues_url": "https://bitbucket.org/landcareresearch/puppet-amazon-s3/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 5.0.0 < 7.0.0"
+    },
+    {
+      "name": "puppetlabs/vcsrepo",
+      "version_requirement": ">= 3.0.0 < 4.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "14.04",
+        "16.04",
+        "18.04"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.7.0 < 7.0.0"
+    }
+  ],
+  "pdk-version": "1.18.1",
+  "template-url": "pdk-default#1.18.1",
+  "template-ref": "tags/1.18.1-0-g3d2e75c",
+  "version": "6.0.0"
+}
