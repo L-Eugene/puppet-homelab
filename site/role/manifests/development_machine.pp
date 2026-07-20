@@ -3,4 +3,5 @@ class role::development_machine {
     timezone => 'Europe/Sofia',
   }
   include profile::vscode_flatpak
+  include profile::docker_compose
 }
