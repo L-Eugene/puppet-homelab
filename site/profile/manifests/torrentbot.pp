@@ -65,9 +65,53 @@ class profile::torrentbot {
     notify  => Exec['systemd-reload']
   }
 
+  # Oneshot service that pulls fresh images and recreates changed containers
+  systemd::unit_file { 'torrentbot-update.service':
+    content => @("EOT"/L),
+      [Unit]
+      Description=TorrentBot Docker Image Updater
+      After=network-online.target docker.service
+      Wants=network-online.target
+      Requires=docker.service
+
+      [Service]
+      Type=oneshot
+      WorkingDirectory=${torrentbot_dir}
+      ExecStart=/usr/bin/docker compose pull
+      ExecStartPost=/usr/bin/docker compose up -d --remove-orphans
+      | EOT
+    require => Archive["${torrentbot_dir}/docker-compose.yml"],
+    notify  => Exec['systemd-reload'],
+  }
+
+  # Daily timer that triggers the update service
+  systemd::unit_file { 'torrentbot-update.timer':
+    content => @(EOT/L),
+      [Unit]
+      Description=TorrentBot Docker Image Update Timer
+
+      [Timer]
+      OnCalendar=*-*-* 04:00:00
+      RandomizedDelaySec=1800
+      Persistent=true
+      Unit=torrentbot-update.service
+
+      [Install]
+      WantedBy=timers.target
+      | EOT
+    require => Systemd::Unit_file['torrentbot-update.service'],
+    notify  => Exec['systemd-reload'],
+  }
+
   service { 'torrentbot':
     ensure  => running,
     enable  => true,
     require => Systemd::Unit_file['torrentbot.service'],
+  }
+
+  service { 'torrentbot-update.timer':
+    ensure  => running,
+    enable  => true,
+    require => Systemd::Unit_file['torrentbot-update.timer'],
   }
 }
