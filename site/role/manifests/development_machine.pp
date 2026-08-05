@@ -4,4 +4,5 @@ class role::development_machine {
   }
   include profile::vscode_flatpak
   include profile::docker_compose
+  include profile::autostart_cinnamon
 }
