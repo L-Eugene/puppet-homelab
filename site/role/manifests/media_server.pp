@@ -3,6 +3,7 @@ class role::media_server {
   class { 'profile::timezone':
     timezone => 'Europe/Sofia',
   }
+  include profile::ssh_root_auth
   include profile::docker_compose
   include profile::torrentbot
 }
