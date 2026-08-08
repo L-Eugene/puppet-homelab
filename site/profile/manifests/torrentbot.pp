@@ -1,6 +1,7 @@
 class profile::torrentbot {
   $torrentbot_dir = '/srv/'
   $downloads_link = '/srv/downloads'
+  $torrentbot_repo = 'https://raw.githubusercontent.com/OksLo/torrentbot/main'
   $env            = lookup('profile::torrentbot::env', Hash[String, String])
 
   # Ensure /srv directory exists
@@ -9,16 +10,15 @@ class profile::torrentbot {
     mode   => '0755',
   }
 
-  archive { "${torrentbot_dir}/docker-compose.yml":
-    ensure  => present,
-    source  => 'https://raw.githubusercontent.com/OksLo/torrentbot/main/docker-compose.yml',
+  exec { 'download-torrentbot-docker-compose':
+    command => "/usr/bin/curl -fsSL -o ${torrentbot_dir}/docker-compose.yml ${torrentbot_repo}/docker-compose.yml",
+    unless  => "/usr/bin/curl -fsSL ${torrentbot_repo}/docker-compose.yml | /usr/bin/cmp -s - ${torrentbot_dir}/docker-compose.yml",
+    path    => ['/usr/bin', '/bin'],
     require => File[$torrentbot_dir],
   }
 
-  archive { "${torrentbot_dir}/setup.py":
-    ensure  => present,
-    source  => 'https://raw.githubusercontent.com/OksLo/torrentbot/main/setup.py',
-    require => File[$torrentbot_dir],
+  file { "${torrentbot_dir}/setup.py":
+    ensure => absent,
   }
 
   # Create .env file
@@ -61,7 +61,7 @@ class profile::torrentbot {
       [Install]
       WantedBy=multi-user.target
       | EOT
-    require => Archive["${torrentbot_dir}/docker-compose.yml"],
+    require => Exec['download-torrentbot-docker-compose'],
     notify  => Exec['systemd-reload']
   }
 
@@ -80,7 +80,7 @@ class profile::torrentbot {
       ExecStart=/usr/bin/docker compose pull
       ExecStartPost=/usr/bin/docker compose up -d --remove-orphans
       | EOT
-    require => Archive["${torrentbot_dir}/docker-compose.yml"],
+    require => Exec['download-torrentbot-docker-compose'],
     notify  => Exec['systemd-reload'],
   }
 
