@@ -1,17 +1,17 @@
 class profile::docker_compose {
-  # Ubuntu 26.04+ has docker in official repos with different package names
-  # docker.io (instead of docker-ce) and docker-compose-v2 (instead of docker-compose-plugin)
-  $use_ubuntu_repo = ($facts['os']['name'] == 'Ubuntu' and versioncmp($facts['os']['release']['major'], '26') >= 0)
+  # Use official distro repositories for Linux Mint and Ubuntu 26.04+, where
+  # Docker is available as docker.io instead of docker-ce.
+  # Ubuntu 26.04+ also uses docker-compose-v2 in the official repos.
+  $use_official_repo = ($facts['os']['name'] == 'Ubuntu' and versioncmp($facts['os']['release']['major'], '26') >= 0) or
+                       ($facts['os']['name'] == 'LinuxMint')
 
-  if $use_ubuntu_repo {
-    # Use official Ubuntu repositories for Ubuntu 26.04+
+  if $use_official_repo {
     class { 'docker':
-      log_driver                 => 'journald',
+      log_driver                  => 'journald',
       use_upstream_package_source => false,
-      docker_ce_package_name     => 'docker.io',
+      docker_ce_package_name      => 'docker.io',
     }
-    
-    # Install docker-compose-v2 from Ubuntu repos (module hardcodes docker-compose-plugin)
+
     package { 'docker-compose-v2':
       ensure => present,
     }
@@ -21,7 +21,7 @@ class profile::docker_compose {
       log_driver                   => 'journald',
       use_upstream_package_source  => true,
     }
-    
+
     # Use module's default docker-compose-plugin package for upstream repos
     include 'docker::compose'
   }
