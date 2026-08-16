@@ -1,8 +1,18 @@
-class profile::torrentbot {
+class profile::torrentbot (
+  Boolean $gpu_enabled = true,
+) {
   $torrentbot_dir = '/srv/'
   $downloads_link = '/srv/downloads'
   $torrentbot_repo = 'https://raw.githubusercontent.com/OksLo/torrentbot/main'
   $env            = lookup('profile::torrentbot::env', Hash[String, String])
+  $docker_compose_flags = $gpu_enabled ? {
+    true    => '-f docker-compose.yml -f docker-compose.gpu.yml',
+    default => '-f docker-compose.yml',
+  }
+  $compose_require = $gpu_enabled ? {
+    true    => [Exec['download-torrentbot-docker-compose'], Exec['download-torrentbot-docker-compose-gpu']],
+    default => Exec['download-torrentbot-docker-compose'],
+  }
 
   # Ensure /srv directory exists
   file { $torrentbot_dir:
@@ -15,6 +25,19 @@ class profile::torrentbot {
     unless  => "/usr/bin/curl -fsSL ${torrentbot_repo}/docker-compose.yml | /usr/bin/cmp -s - ${torrentbot_dir}/docker-compose.yml",
     path    => ['/usr/bin', '/bin'],
     require => File[$torrentbot_dir],
+  }
+
+  if $gpu_enabled {
+    exec { 'download-torrentbot-docker-compose-gpu':
+      command => "/usr/bin/curl -fsSL -o ${torrentbot_dir}/docker-compose.gpu.yml ${torrentbot_repo}/docker-compose.gpu.yml",
+      unless  => "/usr/bin/curl -fsSL ${torrentbot_repo}/docker-compose.gpu.yml | /usr/bin/cmp -s - ${torrentbot_dir}/docker-compose.gpu.yml",
+      path    => ['/usr/bin', '/bin'],
+      require => File[$torrentbot_dir],
+    }
+  } else {
+    file { "${torrentbot_dir}/docker-compose.gpu.yml":
+      ensure => absent,
+    }
   }
 
   file { "${torrentbot_dir}/setup.py":
@@ -54,14 +77,14 @@ class profile::torrentbot {
       [Service]
       Type=oneshot
       WorkingDirectory=${torrentbot_dir}
-      ExecStart=/usr/bin/docker compose up -d --remove-orphans
-      ExecStop=/usr/bin/docker compose down
+      ExecStart=/usr/bin/docker compose ${docker_compose_flags} up -d --remove-orphans
+      ExecStop=/usr/bin/docker compose ${docker_compose_flags} down
       RemainAfterExit=yes
 
       [Install]
       WantedBy=multi-user.target
       | EOT
-    require => Exec['download-torrentbot-docker-compose'],
+    require => $compose_require,
     notify  => Exec['systemd-reload']
   }
 
@@ -77,10 +100,10 @@ class profile::torrentbot {
       [Service]
       Type=oneshot
       WorkingDirectory=${torrentbot_dir}
-      ExecStart=/usr/bin/docker compose pull
-      ExecStartPost=/usr/bin/docker compose up -d --remove-orphans
+      ExecStart=/usr/bin/docker compose ${docker_compose_flags} pull
+      ExecStartPost=/usr/bin/docker compose ${docker_compose_flags} up -d --remove-orphans
       | EOT
-    require => Exec['download-torrentbot-docker-compose'],
+    require => $compose_require,
     notify  => Exec['systemd-reload'],
   }
 
