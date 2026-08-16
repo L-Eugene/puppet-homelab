@@ -26,7 +26,7 @@ class profile::torrentbot (
 
   exec { 'download-torrentbot-docker-compose':
     command => "/usr/bin/curl -fsSL -o ${torrentbot_dir}/docker-compose.yml ${torrentbot_repo}/docker-compose.yml",
-    unless  => "/usr/bin/curl -fsSL ${torrentbot_repo}/docker-compose.yml | /usr/bin/cmp -s - ${torrentbot_dir}/docker-compose.yml",
+    unless  => "/usr/bin/bash -c 'test -s ${torrentbot_dir}/docker-compose.yml && /usr/bin/curl -fsSL ${torrentbot_repo}/docker-compose.yml -o /tmp/docker-compose.yml && /usr/bin/cmp -s /tmp/docker-compose.yml ${torrentbot_dir}/docker-compose.yml'",
     path    => ['/usr/bin', '/bin'],
     require => File[$torrentbot_dir],
   }
@@ -34,7 +34,7 @@ class profile::torrentbot (
   if $gpu_enabled {
     exec { 'download-torrentbot-docker-compose-gpu':
       command => "/usr/bin/curl -fsSL -o ${torrentbot_dir}/docker-compose.gpu.yml ${torrentbot_repo}/docker-compose.gpu.yml",
-      unless  => "/usr/bin/curl -fsSL ${torrentbot_repo}/docker-compose.gpu.yml | /usr/bin/cmp -s - ${torrentbot_dir}/docker-compose.gpu.yml",
+      unless  => "/usr/bin/bash -c 'test -s ${torrentbot_dir}/docker-compose.gpu.yml && /usr/bin/curl -fsSL ${torrentbot_repo}/docker-compose.gpu.yml -o /tmp/docker-compose.gpu.yml && /usr/bin/cmp -s /tmp/docker-compose.gpu.yml ${torrentbot_dir}/docker-compose.gpu.yml'",
       path    => ['/usr/bin', '/bin'],
       require => File[$torrentbot_dir],
     }
