@@ -5,6 +5,10 @@ class profile::torrentbot (
   $downloads_link = '/srv/downloads'
   $torrentbot_repo = 'https://raw.githubusercontent.com/OksLo/torrentbot/main'
   $env            = lookup('profile::torrentbot::env', Hash[String, String])
+  $render_group   = generate('/usr/bin/getent', 'group', 'render')
+  $video_group    = generate('/usr/bin/getent', 'group', 'video')
+  $render_gid     = split($render_group, ':')[2]
+  $video_gid      = split($video_group, ':')[2]
   $docker_compose_flags = $gpu_enabled ? {
     true    => '-f docker-compose.yml -f docker-compose.gpu.yml',
     default => '-f docker-compose.yml',
@@ -44,6 +48,13 @@ class profile::torrentbot (
     ensure => absent,
   }
 
+  file { "${torrentbot_dir}/systemd.env":
+    ensure  => file,
+    mode    => '0644',
+    content => "RENDER_GID=${render_gid}\nVIDEO_GID=${video_gid}\n",
+    require => File[$torrentbot_dir],
+  }
+
   # Create .env file
   file { "${torrentbot_dir}/.env":
     ensure  => file,
@@ -77,6 +88,7 @@ class profile::torrentbot (
       [Service]
       Type=oneshot
       WorkingDirectory=${torrentbot_dir}
+      EnvironmentFile=${torrentbot_dir}/systemd.env
       ExecStart=/usr/bin/docker compose ${docker_compose_flags} up -d --remove-orphans
       ExecStop=/usr/bin/docker compose ${docker_compose_flags} down
       RemainAfterExit=yes
@@ -100,6 +112,7 @@ class profile::torrentbot (
       [Service]
       Type=oneshot
       WorkingDirectory=${torrentbot_dir}
+      EnvironmentFile=${torrentbot_dir}/systemd.env
       ExecStart=/usr/bin/docker compose ${docker_compose_flags} pull
       ExecStartPost=/usr/bin/docker compose ${docker_compose_flags} up -d --remove-orphans
       | EOT
