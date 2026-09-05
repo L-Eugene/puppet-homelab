@@ -17,9 +17,15 @@ class profile::docker_compose {
     }
   } else {
     # Use upstream Docker repositories for earlier Ubuntu versions
+    $docker_ce_source = $facts['os']['name'] == 'LinuxMint' ? {
+      true    => 'https://download.docker.com/linux/ubuntu',
+      default => undef,
+    }
+
     class { 'docker':
       log_driver                   => 'journald',
       use_upstream_package_source  => true,
+      docker_ce_source_location    => $docker_ce_source,
     }
 
     # Use module's default docker-compose-plugin package for upstream repos
