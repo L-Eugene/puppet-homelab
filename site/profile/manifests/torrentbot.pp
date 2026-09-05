@@ -1,5 +1,6 @@
 class profile::torrentbot (
   Boolean $gpu_enabled = true,
+  Boolean $blkio_enabled = true,
 ) {
   $torrentbot_dir = '/srv/'
   $downloads_link = '/srv/downloads'
@@ -9,13 +10,16 @@ class profile::torrentbot (
   $video_group    = generate('/usr/bin/getent', 'group', 'video')
   $render_gid     = split($render_group, ':')[2]
   $video_gid      = split($video_group, ':')[2]
-  $docker_compose_flags = $gpu_enabled ? {
-    true    => '-f docker-compose.yml -f docker-compose.gpu.yml',
-    default => '-f docker-compose.yml',
+
+  $docker_compose_flags = '-f docker-compose.yml'
+  $compose_require = [Exec['download-torrentbot-docker-compose']]
+  if $gpu_enabled {
+    $docker_compose_flags = "${docker_compose_flags} -f docker-compose.gpu.yml"
+    $compose_require += [Exec['download-torrentbot-docker-compose-gpu']]
   }
-  $compose_require = $gpu_enabled ? {
-    true    => [Exec['download-torrentbot-docker-compose'], Exec['download-torrentbot-docker-compose-gpu']],
-    default => Exec['download-torrentbot-docker-compose'],
+  if $blkio_enabled {
+    $docker_compose_flags = "${docker_compose_flags} -f docker-compose.blkio.yml"
+    $compose_require += [Exec['download-torrentbot-docker-compose-blkio']]
   }
 
   # Ensure /srv directory exists
@@ -40,6 +44,19 @@ class profile::torrentbot (
     }
   } else {
     file { "${torrentbot_dir}/docker-compose.gpu.yml":
+      ensure => absent,
+    }
+  }
+
+  if $blkio_enabled {
+    exec { 'download-torrentbot-docker-compose-blkio':
+      command => "/usr/bin/curl -fsSL -o ${torrentbot_dir}/docker-compose.blkio.yml ${torrentbot_repo}/docker-compose.blkio.yml",
+      unless  => "/usr/bin/bash -c 'test -s ${torrentbot_dir}/docker-compose.blkio.yml && /usr/bin/curl -fsSL ${torrentbot_repo}/docker-compose.blkio.yml -o /tmp/docker-compose.blkio.yml && /usr/bin/cmp -s /tmp/docker-compose.blkio.yml ${torrentbot_dir}/docker-compose.blkio.yml'",
+      path    => ['/usr/bin', '/bin'],
+      require => File[$torrentbot_dir],
+    }
+  } else {
+    file { "${torrentbot_dir}/docker-compose.blkio.yml":
       ensure => absent,
     }
   }
