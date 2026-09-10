@@ -119,7 +119,9 @@ class profile::torrentbot (
     notify  => Exec['systemd-reload']
   }
 
-  # Oneshot service that pulls fresh images and recreates changed containers
+  # Oneshot service that pulls fresh images and recreates changed containers,
+  # then restarts the main torrentbot service only if the compose pull step
+  # reports a changed image reference.
   systemd::unit_file { 'torrentbot-update.service':
     content => @("EOT"/L),
       [Unit]
@@ -132,8 +134,7 @@ class profile::torrentbot (
       Type=oneshot
       WorkingDirectory=${torrentbot_dir}
       EnvironmentFile=${torrentbot_dir}/systemd.env
-      ExecStart=/usr/bin/docker compose ${docker_compose_flags} pull
-      ExecStartPost=/usr/bin/docker compose ${docker_compose_flags} up -d --remove-orphans
+      ExecStart=/bin/bash -c 'set -e; /usr/bin/docker compose ${docker_compose_flags} pull >/tmp/torrentbot.pull.log 2>&1; /usr/bin/docker compose ${docker_compose_flags} up -d --remove-orphans >/tmp/torrentbot.up.log 2>&1; if grep -E "Downloaded newer image|Image is up to date|Pulled" /tmp/torrentbot.pull.log >/dev/null; then /bin/systemctl restart torrentbot.service; fi'
       | EOT
     require => $compose_require,
     notify  => Exec['systemd-reload'],
