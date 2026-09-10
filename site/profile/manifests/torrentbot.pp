@@ -11,16 +11,18 @@ class profile::torrentbot (
   $render_gid     = split($render_group, ':')[2]
   $video_gid      = split($video_group, ':')[2]
 
-  $docker_compose_flags = '-f docker-compose.yml'
-  $compose_require = [Exec['download-torrentbot-docker-compose']]
-  if $gpu_enabled {
-    $docker_compose_flags = "${docker_compose_flags} -f docker-compose.gpu.yml"
-    $compose_require = $compose_require + [Exec['download-torrentbot-docker-compose-gpu']]
-  }
-  if $blkio_enabled {
-    $docker_compose_flags = "${docker_compose_flags} -f docker-compose.blkio.yml"
-    $compose_require = $compose_require + [Exec['download-torrentbot-docker-compose-blkio']]
-  }
+  $docker_compose_flags = "-f docker-compose.yml${$gpu_enabled ? { true => ' -f docker-compose.gpu.yml', default => '' }}${$blkio_enabled ? { true => ' -f docker-compose.blkio.yml', default => '' }}"
+  $compose_require = [Exec['download-torrentbot-docker-compose']] + (
+    $gpu_enabled ? {
+      true  => [Exec['download-torrentbot-docker-compose-gpu']],
+      false => [],
+    }
+  ) + (
+    $blkio_enabled ? {
+      true  => [Exec['download-torrentbot-docker-compose-blkio']],
+      false => [],
+    }
+  )
 
   # Ensure /srv directory exists
   file { $torrentbot_dir:
