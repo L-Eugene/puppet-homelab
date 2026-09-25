@@ -6,10 +6,18 @@ class profile::docker_compose {
                        ($facts['os']['name'] == 'LinuxMint')
 
   if $use_official_repo {
+    # Remove the stale upstream source file left by a previous docker module run.
+    # puppetlabs-docker does not clean this up when switching to use_upstream_package_source => false.
+    file { '/etc/apt/sources.list.d/docker.list':
+      ensure => absent,
+      notify => Class['apt::update'],
+    }
+
     class { 'docker':
       log_driver                  => 'journald',
       use_upstream_package_source => false,
       docker_ce_package_name      => 'docker.io',
+      require                     => File['/etc/apt/sources.list.d/docker.list'],
     }
 
     package { 'docker-compose-v2':
