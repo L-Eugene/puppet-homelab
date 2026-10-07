@@ -6,6 +6,10 @@ class profile::docker_compose {
                        ($facts['os']['name'] == 'LinuxMint')
 
   if $use_official_repo {
+    # The docker module only declares apt when using upstream sources, so
+    # include it here to make Class['apt::update'] available.
+    include apt
+
     # Remove the stale upstream source file left by a previous docker module run.
     # puppetlabs-docker does not clean this up when switching to use_upstream_package_source => false.
     file { '/etc/apt/sources.list.d/docker.list':
