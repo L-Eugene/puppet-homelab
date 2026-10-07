@@ -1,3 +1,0 @@
-#!/bin/sh
-echo "mock dracut for testing"
-echo $@ > /tmp/testcase/dracut_executed
